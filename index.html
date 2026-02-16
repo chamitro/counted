@@ -99,7 +99,16 @@
     </div>
     <div class="form-group"><label class="form-label">Birthday</label>
       <div style="display:grid;grid-template-columns:1fr 2fr 1.2fr;gap:8px">
-        <select class="form-input" id="f-bd-day"><option value="">Day</option></select>
+        <select class="form-input" id="f-bd-day">
+          <option value="">Day</option>
+          <option value="01">1</option><option value="02">2</option><option value="03">3</option><option value="04">4</option><option value="05">5</option>
+          <option value="06">6</option><option value="07">7</option><option value="08">8</option><option value="09">9</option><option value="10">10</option>
+          <option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option>
+          <option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option>
+          <option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option>
+          <option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option>
+          <option value="31">31</option>
+        </select>
         <select class="form-input" id="f-bd-month">
           <option value="">Month</option>
           <option value="01">January</option><option value="02">February</option><option value="03">March</option>
@@ -124,9 +133,18 @@
         <option value="doctor">🏥 Doctor / Physician</option>
         <option value="nurse">🏥 Nurse / Midwife</option>
         <option value="dentist">🏥 Dentist / Pharmacist</option>
-        <option value="therapist">🏥 Therapist / Psychologist</option>
+        <option value="therapist">🏥 Therapist / Counselor</option>
+        <option value="psychiatrist">🏥 Psychiatrist</option>
+        <option value="psychologist">🏥 Psychologist</option>
         <option value="veterinarian">🏥 Veterinarian</option>
         <option value="researcher">🔬 Researcher / Scientist</option>
+        <option value="anthropologist">🔬 Anthropologist</option>
+        <option value="sociologist">🔬 Sociologist</option>
+        <option value="archaeologist">🔬 Archaeologist</option>
+        <option value="biologist">🔬 Biologist</option>
+        <option value="chemist">🔬 Chemist</option>
+        <option value="physicist">🔬 Physicist</option>
+        <option value="economist">📊 Economist</option>
         <option value="professor">🎓 Professor / Lecturer</option>
         <option value="teacher">🎓 Teacher / Tutor</option>
         <option value="student">📚 Student / Intern</option>
@@ -267,8 +285,20 @@
       <div class="form-group"><label class="form-label">Daily Coffee ☕</label>
         <input class="form-input" id="f-coffee" type="number" placeholder="2" min="0" max="20" value="2">
       </div>
+      <div class="form-group"><label class="form-label">Water Bottles / Day 💧</label>
+        <input class="form-input" id="f-water" type="number" placeholder="4" min="0" max="20" value="4">
+      </div>
+    </div>
+    <div class="form-row">
       <div class="form-group"><label class="form-label">Pets Owned</label>
         <input class="form-input" id="f-pets" type="number" placeholder="1" min="0" max="50" value="0">
+      </div>
+      <div class="form-group"><label class="form-label">Religious?</label>
+        <select class="form-input" id="f-religious">
+          <option value="no">No</option>
+          <option value="yes">Yes 🙏</option>
+          <option value="spiritual">Spiritual but not religious ✨</option>
+        </select>
       </div>
     </div>
     <div style="padding:12px 0 4px;border-top:1px solid var(--border);margin-top:12px"><span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent2);letter-spacing:3px;text-transform:uppercase">LIFESTYLE</span></div>
@@ -326,6 +356,39 @@
           <option value="early">Early bird 🌅</option>
           <option value="night">Night owl 🦉</option>
           <option value="neither">Neither 🤷</option>
+        </select>
+      </div>
+    </div>
+    <div style="padding:12px 0 4px;border-top:1px solid var(--border);margin-top:12px"><span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent2);letter-spacing:3px;text-transform:uppercase">HEALTH & WELLBEING</span></div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">See Therapist / Psychologist?</label>
+        <select class="form-input" id="f-therapy">
+          <option value="no">No</option>
+          <option value="currently">Yes, currently 🧠</option>
+          <option value="past">In the past</option>
+        </select>
+      </div>
+      <div class="form-group"><label class="form-label">See Psychiatrist?</label>
+        <select class="form-input" id="f-psychiatrist">
+          <option value="no">No</option>
+          <option value="currently">Yes, currently 💊</option>
+          <option value="past">In the past</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Chronic Health Condition?</label>
+        <select class="form-input" id="f-health-condition">
+          <option value="no">No</option>
+          <option value="yes">Yes</option>
+          <option value="multiple">Yes, multiple</option>
+        </select>
+      </div>
+      <div class="form-group"><label class="form-label">Mental Health Condition?</label>
+        <select class="form-input" id="f-mental-health">
+          <option value="no">No</option>
+          <option value="yes">Yes</option>
+          <option value="multiple">Yes, multiple</option>
         </select>
       </div>
     </div>
@@ -481,9 +544,6 @@ function card(n,t,c){return'<div class="fact-card"><div class="fact-number '+c+'
 function cardS(n,t,c){return'<div class="fact-card small"><div class="fact-number '+c+'">'+n+'</div><div class="fact-text">'+t+'</div></div>'}
 function dnaCard(n,t,c){return'<div class="dna-card"><div class="fact-number '+c+'">'+n+'</div><div class="fact-text">'+t+'</div></div>'}
 function src(t){return'<div class="source-tag">'+t+'</div>'}
-
-// Populate birthday day dropdown
-(function(){const s=document.getElementById('f-bd-day');for(let i=1;i<=31;i++){const o=document.createElement('option');o.value=String(i).padStart(2,'0');o.textContent=i;s.appendChild(o);}})();
 
 // Dynamic sibling age inputs
 function updateSiblingInputs() {
@@ -841,6 +901,12 @@ async function startGenerate() {
     momAge, dadAge, parentsStatus, siblingAges,
     momAlive: document.getElementById('f-mom-alive').value,
     dadAlive: document.getElementById('f-dad-alive').value,
+    waterBottlesPerDay: parseInt(document.getElementById('f-water').value) || 4,
+    religious: document.getElementById('f-religious').value,
+    therapy: document.getElementById('f-therapy').value,
+    psychiatrist: document.getElementById('f-psychiatrist').value,
+    healthCondition: document.getElementById('f-health-condition').value,
+    mentalHealth: document.getElementById('f-mental-health').value,
   };
 
   if(!name||isNaN(age)||!age||!bdStr||!city||!userCountry||isNaN(height)||!height||isNaN(weight)||!weight||!job){
@@ -979,7 +1045,15 @@ function generateResults(name, age, gender, bdStr, city, height, weight, job, si
     relationship, kids, exercise, alcohol, chronotype, canSwim, canDrive,
     canBike, cookLevel, instrument, cpr, education, passport, tattoo, brokenBone, donatedBlood,
     momAge, dadAge, parentsStatus, siblingAges, momAlive, dadAlive,
-    workHrsPerDay, homeMealsPerWeek, friendDaysPerWeek, relDuration, cigsPerDay } = extra;
+    workHrsPerDay, homeMealsPerWeek, friendDaysPerWeek, relDuration, cigsPerDay,
+    waterBottlesPerDay, religious, therapy, psychiatrist, healthCondition, mentalHealth } = extra;
+
+  // ═══ SKILLS COUNT (defined early for cross-referencing) ═══
+  const skillsList = [
+    canSwim==='yes', canDrive==='yes', canBike==='yes', cookLevel!=='no',
+    instrument==='yes', cpr==='yes', education!=='none'&&education!=='school', passport==='yes'
+  ];
+  const skillCount = skillsList.filter(Boolean).length;
 
   // ═══ FAMILY ═══
   const sibPcts=[15,38,27,13,5,2];
@@ -1064,9 +1138,18 @@ function generateResults(name, age, gender, bdStr, city, height, weight, job, si
     'doctor':       {cat:'Healthcare — Doctor',icon:'🏥',hrsWeek:52,meetPct:0.06,retireAge:63,stress:'very high',global:10000000,fact:'You\'ll wash your hands ~45,000 more times than the average person',standHrs:0.6,coffee:3.5,salary:'$100k-350k'},
     'nurse':        {cat:'Healthcare — Nursing',icon:'🏥',hrsWeek:42,meetPct:0.04,retireAge:60,stress:'very high',global:28000000,fact:'You\'ll walk ~6,000 km more than an office worker during shifts',standHrs:0.75,coffee:3.0,salary:'$40k-90k'},
     'dentist':      {cat:'Healthcare — Dental',icon:'🦷',hrsWeek:38,meetPct:0.04,retireAge:63,stress:'moderate',global:2600000,fact:'You\'ll look inside approximately 80,000 mouths in your career',standHrs:0.5,coffee:2.5,salary:'$70k-200k'},
-    'therapist':    {cat:'Psychology / Therapy',icon:'🧠',hrsWeek:40,meetPct:0.03,retireAge:65,stress:'moderate',global:6000000,fact:'You\'ll listen to approximately 35,000 hours of people\'s life stories',standHrs:0.1,coffee:2.8,salary:'$45k-120k'},
+    'therapist':    {cat:'Therapist / Counselor',icon:'🧠',hrsWeek:40,meetPct:0.03,retireAge:65,stress:'high',global:2000000,fact:'You\'ll conduct approximately 40,000 therapy sessions and help thousands process their experiences',standHrs:0.1,coffee:2.8,salary:'$45k-120k'},
+    'psychiatrist': {cat:'Psychiatrist',icon:'⚕️',hrsWeek:45,meetPct:0.10,retireAge:67,stress:'very high',global:500000,fact:'You\'ll help restore mental health to tens of thousands of patients over your career',standHrs:0.15,coffee:3.0,salary:'$200k-400k'},
+    'psychologist': {cat:'Psychologist',icon:'🧠',hrsWeek:42,meetPct:0.08,retireAge:67,stress:'high',global:1200000,fact:'You\'ll conduct approximately 50,000 patient hours and help decode the mysteries of human behavior',standHrs:0.15,coffee:2.8,salary:'$60k-150k'},
     'veterinarian': {cat:'Veterinary Medicine',icon:'🐾',hrsWeek:45,meetPct:0.04,retireAge:62,stress:'high',global:700000,fact:'You\'ll treat approximately 20,000 more animals — each one someone\'s family',standHrs:0.6,coffee:3.0,salary:'$60k-150k'},
     'researcher':   {cat:'Research & Science',icon:'🔬',hrsWeek:47,meetPct:0.08,retireAge:67,stress:'moderate',global:9000000,fact:'You\'ll read approximately 15,000 more papers and write ~50 of your own',standHrs:0.2,coffee:3.8,salary:'$40k-120k'},
+    'anthropologist':{cat:'Anthropology',icon:'🏺',hrsWeek:42,meetPct:0.10,retireAge:68,stress:'moderate',global:30000,fact:'You\'ll study human cultures across time and space — only ~30,000 people in the world share your profession',standHrs:0.4,coffee:2.5,salary:'$45k-100k'},
+    'sociologist':  {cat:'Sociology',icon:'👥',hrsWeek:40,meetPct:0.12,retireAge:67,stress:'moderate',global:50000,fact:'You\'ll analyze human social behavior — your work helps explain why societies function (or don\'t)',standHrs:0.2,coffee:2.8,salary:'$50k-110k'},
+    'archaeologist':{cat:'Archaeology',icon:'⛏️',hrsWeek:42,meetPct:0.08,retireAge:67,stress:'moderate',global:25000,fact:'You\'ll carefully excavate and preserve history — connecting humanity to its forgotten past',standHrs:0.6,coffee:2.0,salary:'$40k-90k'},
+    'biologist':    {cat:'Biology',icon:'🧬',hrsWeek:44,meetPct:0.10,retireAge:67,stress:'moderate',global:500000,fact:'You\'ll study the mechanisms of life itself — from cells to ecosystems',standHrs:0.4,coffee:3.0,salary:'$50k-120k'},
+    'chemist':      {cat:'Chemistry',icon:'⚗️',hrsWeek:44,meetPct:0.10,retireAge:65,stress:'moderate',global:400000,fact:'You\'ll conduct thousands of experiments at the molecular level — creating new materials and compounds',standHrs:0.5,coffee:3.2,salary:'$55k-130k'},
+    'physicist':    {cat:'Physics',icon:'⚛️',hrsWeek:45,meetPct:0.12,retireAge:68,stress:'moderate',global:200000,fact:'You\'ll explore the fundamental laws of the universe — fewer than 200,000 people share your profession',standHrs:0.3,coffee:3.5,salary:'$60k-150k'},
+    'economist':    {cat:'Economics',icon:'📊',hrsWeek:44,meetPct:0.15,retireAge:67,stress:'moderate',global:300000,fact:'You\'ll analyze economic systems that affect billions of people\'s daily lives',standHrs:0.15,coffee:3.0,salary:'$60k-180k'},
     'professor':    {cat:'University Professor',icon:'🎓',hrsWeek:50,meetPct:0.12,retireAge:67,stress:'moderate',global:4000000,fact:'You\'ll grade approximately 50,000 more assignments and exams',standHrs:0.4,coffee:3.5,salary:'$50k-150k'},
     'teacher':      {cat:'Education — Teacher',icon:'📖',hrsWeek:44,meetPct:0.10,retireAge:62,stress:'moderate',global:70000000,fact:'You\'ll say "please pay attention" approximately 30,000 more times',standHrs:0.6,coffee:2.8,salary:'$30k-75k'},
     'student':      {cat:'Student / Intern',icon:'📚',hrsWeek:35,meetPct:0.05,retireAge:65,stress:'moderate',global:200000000,fact:'You\'ll take approximately 3,000 more exams in your academic journey',standHrs:0.2,coffee:2.5,salary:'$0-25k'},
@@ -1805,6 +1888,715 @@ function generateResults(name, age, gender, bdStr, city, height, weight, job, si
   const healthDiff = Math.round(healthAgeOffset * 10) / 10;
   const adjustedLifeExp = Math.round(lifeExp - healthAgeOffset);
   const adjustedYrsLeft = Math.max(0, adjustedLifeExp - age);
+
+  // ═══ 💧 WATER CONSUMPTION (from user input) ═══
+  const waterBottlesMl = 500; // standard bottle size
+  const waterMlPerDay = waterBottlesPerDay * waterBottlesMl;
+  const waterLitersPerDay = waterMlPerDay / 1000;
+  const waterLitersLifetime = Math.round(waterLitersPerDay * daysAlive);
+  const waterLitersRemaining = Math.round(waterLitersPerDay * yrsLeft * 365);
+  const recommendedWaterMl = weight * 35; // 35ml per kg body weight
+  const waterPctOfRecommended = Math.round((waterMlPerDay / recommendedWaterMl) * 100);
+  const isHydrated = waterPctOfRecommended >= 80;
+
+  // ═══ 🙏 RELIGION STATS ═══
+  const religiousPct = 84; // ~84% of world identifies as religious
+  const notReligiousPct = 16;
+  const spiritualPct = 8; // roughly 8% spiritual but not religious
+  const religiousLabel = religious === 'yes' ? 'Religious' : religious === 'spiritual' ? 'Spiritual' : 'Not religious';
+  const religiousFacts = {
+    'yes': 'You\'re among the 84% of humanity who identify with a religion. Studies show religious people report 20% higher life satisfaction on average.',
+    'spiritual': 'You\'re among the ~8% who consider themselves spiritual but not religious. This group has tripled since 1999.',
+    'no': 'You\'re among the 16% who aren\'t religious. This group is growing fastest in developed nations — doubled since 2007.'
+  };
+
+  // ═══ 🧠 MENTAL HEALTH STATS ═══
+  const therapyPct = 13; // ~13% of adults have seen a therapist
+  const psychiatristPct = 7; // ~7% have seen a psychiatrist
+  const therapyLabel = therapy === 'currently' ? 'Currently in therapy' : therapy === 'past' ? 'Past therapy' : 'No therapy';
+  const psychiatristLabel = psychiatrist === 'currently' ? 'Currently seeing psychiatrist' : psychiatrist === 'past' ? 'Past psychiatrist visits' : 'Never seen psychiatrist';
+  const therapyFacts = {
+    'currently': 'You\'re actively working on your mental health — only ~5% of adults are currently in therapy. This shows remarkable self-awareness.',
+    'past': 'You\'ve invested in your mental well-being — ~13% of adults have been to therapy at some point. The skills you learned stay with you.',
+    'no': 'You\'ve never been to therapy — you\'re in the 87% majority. Remember: therapy isn\'t just for crises, it\'s also for growth.'
+  };
+  const psychiatristFacts = {
+    'currently': 'You\'re getting specialized mental health care — only ~3% of adults currently see a psychiatrist. Taking care of your brain is just as important as your body.',
+    'past': 'You\'ve worked with a psychiatrist before — ~7% of adults have at some point. Mental health is health.',
+    'no': 'You\'ve never seen a psychiatrist — you\'re in the 93% majority. Psychiatrists aren\'t just for severe conditions — they can help optimize anyone\'s mental health.'
+  };
+
+  // ═══ 🏥 HEALTH CONDITIONS STATS ═══
+  const chronicHealthPct = 60; // ~60% of adults have at least one chronic condition
+  const multipleHealthPct = 40; // ~40% have 2+ conditions
+  const mentalHealthConditionPct = 25; // ~25% have diagnosable mental health condition
+  const healthConditionLabel = healthCondition === 'yes' ? 'Has chronic condition' : healthCondition === 'multiple' ? 'Multiple conditions' : 'No chronic conditions';
+  const mentalHealthLabel = mentalHealth === 'yes' ? 'Has mental health condition' : mentalHealth === 'multiple' ? 'Multiple conditions' : 'No mental health conditions';
+  const healthConditionFacts = {
+    'yes': 'You\'re managing a chronic condition — you\'re among 60% of adults in this situation. Modern medicine means most chronic conditions are manageable.',
+    'multiple': 'You\'re managing multiple conditions — ~40% of adults have 2+ chronic conditions. You\'re not alone in this complexity.',
+    'no': 'You have no chronic conditions — you\'re in the fortunate 40% minority. Preventive care helps keep it this way.'
+  };
+  const mentalHealthFacts = {
+    'yes': 'You have a mental health condition — ~25% of adults do. It\'s as real as any physical condition and equally deserving of care.',
+    'multiple': 'You\'re managing multiple mental health conditions — this is more common than people think. You\'re handling a lot.',
+    'no': 'You report no mental health conditions — you\'re in the 75% majority. Mental wellness is worth actively maintaining.'
+  };
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // 🧠 DEEP CROSS-REFERENTIAL ANALYSIS
+  // Combining ALL inputs to generate genuinely insightful correlations
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  // ─── YOUR PSYCHOLOGICAL PROFILE ───
+  // Combining: birth order, parents status, siblings, therapy, mental health, religion, relationship
+  const birthOrderFromSiblings = siblings === 0 ? 'only' : 
+    (siblingAges.length > 0 ? 
+      (siblingAges.every(s => s < age) ? 'oldest' : 
+       siblingAges.every(s => s > age) ? 'youngest' : 'middle') : 'unknown');
+  
+  const psychProfile = {
+    attachmentStyle: parentsStatus === 'together' && momAlive === 'alive' && dadAlive === 'alive' ? 'secure-leaning' :
+                     parentsStatus === 'divorced' ? 'may have developed independence early' :
+                     (momAlive === 'passed' || dadAlive === 'passed') ? 'experienced early loss' : 'mixed',
+    copingStrategy: (therapy === 'currently' || psychiatrist === 'currently') ? 'actively processing' :
+                    (therapy === 'past' || psychiatrist === 'past') ? 'has sought help before' :
+                    religious === 'yes' ? 'may use faith as framework' :
+                    religious === 'spiritual' ? 'spiritually-oriented coping' : 'self-reliant approach',
+    socialOrientation: relationship !== 'single' && friendDaysPerWeek >= 3 ? 'highly social' :
+                       relationship !== 'single' || friendDaysPerWeek >= 2 ? 'balanced social' :
+                       friendDaysPerWeek === 0 && relationship === 'single' ? 'independent/introverted' : 'selectively social',
+    birthOrderTraits: birthOrderFromSiblings === 'oldest' ? 'likely responsible, achievement-oriented, natural leader' :
+                      birthOrderFromSiblings === 'youngest' ? 'likely creative, risk-taker, socially skilled' :
+                      birthOrderFromSiblings === 'middle' ? 'likely diplomatic, flexible, independent' :
+                      birthOrderFromSiblings === 'only' ? 'likely mature for age, comfortable alone, perfectionist tendencies' : ''
+  };
+
+  // ─── YOUR COGNITIVE PROFILE ───
+  // Combining: languages, education, instrument, handedness, job
+  const cognitiveScore = (
+    (languages >= 3 ? 3 : languages >= 2 ? 2 : 1) +
+    (education === 'phd' ? 4 : education === 'master' ? 3 : education === 'bachelor' ? 2 : 1) +
+    (instrument === 'yes' ? 2 : 0) +
+    (hand === 'left' || hand === 'ambidextrous' ? 1 : 0) +
+    (['researcher', 'professor', 'data_scientist', 'software_engineer', 'doctor', 'psychiatrist', 'psychologist', 'physicist', 'chemist', 'biologist', 'economist', 'anthropologist'].includes(job) ? 2 : 0)
+  );
+  const cognitivePercentile = cognitiveScore >= 10 ? 99 : cognitiveScore >= 8 ? 95 : cognitiveScore >= 6 ? 85 : cognitiveScore >= 4 ? 70 : cognitiveScore >= 2 ? 50 : 30;
+  const cognitiveProfile = {
+    score: cognitiveScore,
+    percentile: cognitivePercentile,
+    strengths: [
+      languages >= 3 ? 'multilingual advantage (enhanced executive function)' : null,
+      instrument === 'yes' ? 'musical training (30% thicker corpus callosum)' : null,
+      hand === 'left' ? 'left-handed (enhanced right-brain connectivity)' : null,
+      hand === 'ambidextrous' ? 'ambidextrous (rare bilateral brain coordination)' : null,
+      education === 'phd' || education === 'master' ? 'advanced analytical training' : null
+    ].filter(Boolean)
+  };
+
+  // ─── YOUR RESILIENCE INDEX ───
+  // Combining: health conditions, mental health, therapy, exercise, sleep, social connections, religion
+  const resilienceFactors = {
+    physical: (exercise >= 3 ? 2 : exercise >= 1 ? 1 : 0) + (sleepHrs >= 7 && sleepHrs <= 9 ? 1 : 0) + (cigsPerDay === 0 ? 1 : -1) + (healthCondition === 'no' ? 1 : 0),
+    psychological: (therapy === 'currently' || therapy === 'past' ? 2 : 0) + (mentalHealth === 'no' ? 1 : mentalHealth === 'yes' ? 0 : -1) + (psychiatrist === 'currently' || psychiatrist === 'past' ? 1 : 0),
+    social: (relationship !== 'single' ? 1 : 0) + (friendDaysPerWeek >= 2 ? 1 : 0) + (kids > 0 ? 1 : 0) + (pets > 0 ? 0.5 : 0) + (momAlive === 'alive' ? 0.5 : 0) + (dadAlive === 'alive' ? 0.5 : 0),
+    spiritual: religious === 'yes' ? 2 : religious === 'spiritual' ? 1 : 0,
+    skills: (canSwim === 'yes' ? 0.5 : 0) + (cpr === 'yes' ? 0.5 : 0) + (cookLevel !== 'no' ? 0.5 : 0) + (canDrive === 'yes' ? 0.5 : 0)
+  };
+  const resilienceTotal = Object.values(resilienceFactors).reduce((a, b) => a + b, 0);
+  const resiliencePercentile = resilienceTotal >= 12 ? 95 : resilienceTotal >= 9 ? 80 : resilienceTotal >= 6 ? 60 : resilienceTotal >= 3 ? 40 : 20;
+
+  // ─── YOUR PARADOXES & CONTRADICTIONS ───
+  // Finding genuinely interesting contradictions in the data
+  const paradoxes = [];
+  
+  // Health professional with own health issues (healer who understands)
+  if (['doctor', 'nurse', 'psychiatrist', 'psychologist', 'therapist'].includes(job) && (mentalHealth !== 'no' || healthCondition !== 'no')) {
+    paradoxes.push({
+      title: 'The Wounded Healer',
+      insight: 'You heal others while managing your own challenges. Research shows healthcare providers with lived experience often have deeper empathy and better patient outcomes.',
+      emoji: '⚕️'
+    });
+  }
+
+  // High exercise but smoker
+  if (exercise >= 3 && cigsPerDay > 0) {
+    paradoxes.push({
+      title: 'The Athletic Smoker',
+      insight: 'You exercise '+exercise+'× per week but smoke '+cigsPerDay+' cigarettes daily. Your lungs are in a constant battle — each workout partially offsets the damage, but not completely. You\'re essentially running to stand still.',
+      emoji: '🏃‍♂️🚬'
+    });
+  }
+
+  // Therapist/psychiatrist who doesn\'t go to therapy
+  if (['psychiatrist', 'psychologist', 'therapist'].includes(job) && therapy === 'no') {
+    paradoxes.push({
+      title: 'The Cobbler\'s Children',
+      insight: 'You help others process their minds professionally, but haven\'t sought therapy yourself. Like the saying goes — the cobbler\'s children go barefoot.',
+      emoji: '🧠'
+    });
+  }
+
+  // Religious but also in therapy (integration)
+  if (religious === 'yes' && (therapy === 'currently' || psychiatrist === 'currently')) {
+    paradoxes.push({
+      title: 'Faith + Science',
+      insight: 'You combine religious faith with professional mental health care — a powerful combination. Studies show this integration leads to better outcomes than either alone.',
+      emoji: '🙏🧠'
+    });
+  }
+
+  // Highly educated but in physical/manual job (or vice versa)
+  if ((education === 'phd' || education === 'master') && ['farmer', 'construction', 'carpenter', 'mechanic', 'driver', 'delivery', 'waiter', 'barista', 'retail'].includes(job)) {
+    paradoxes.push({
+      title: 'The Overqualified',
+      insight: 'You have a '+edu.label+' but work in a hands-on profession. Either you\'re following passion over credentials, or you discovered that advanced degrees don\'t guarantee happiness.',
+      emoji: '🎓🔧'
+    });
+  }
+
+  // Can\'t swim but lives in coastal city
+  const coastalCities = ['sydney', 'miami', 'los angeles', 'barcelona', 'rio', 'cape town', 'mumbai', 'athens', 'lisbon', 'tokyo', 'hong kong', 'singapore', 'dubai', 'vancouver', 'san francisco', 'seattle', 'boston', 'new york'];
+  if (canSwim === 'no' && coastalCities.some(c => city.toLowerCase().includes(c))) {
+    paradoxes.push({
+      title: 'Land-Locked in Paradise',
+      insight: 'You live in a coastal city but can\'t swim. You\'re surrounded by water you can\'t fully enjoy. Only '+canSwimPct+'% of people globally can swim.',
+      emoji: '🏖️❌'
+    });
+  }
+
+  // Night owl in early-bird job (or vice versa)
+  const earlyJobs = ['farmer', 'teacher', 'nurse', 'doctor', 'construction', 'baker', 'pilot'];
+  const lateJobs = ['musician', 'actor', 'barista', 'chef', 'bartender', 'security'];
+  if (chronotype === 'night' && earlyJobs.includes(job)) {
+    paradoxes.push({
+      title: 'Against Your Clock',
+      insight: 'You\'re a night owl in a profession that demands early mornings. You\'re fighting your circadian rhythm daily — this can add 15% to perceived stress levels.',
+      emoji: '🦉☀️'
+    });
+  }
+  if (chronotype === 'early' && lateJobs.includes(job)) {
+    paradoxes.push({
+      title: 'Early Bird, Late Shift',
+      insight: 'You\'re naturally an early riser but your profession keeps you up late. You\'re probably the most alert person at work when everyone else is fading.',
+      emoji: '🌅🌙'
+    });
+  }
+
+  // High coffee, poor sleep
+  if (myCoffee >= 4 && sleepHrs < 6) {
+    paradoxes.push({
+      title: 'The Caffeine Cycle',
+      insight: 'You drink '+myCoffee+' coffees daily and sleep only '+sleepHrs+' hours. Classic vicious cycle: poor sleep → need more coffee → harder to sleep. Your adenosine receptors are in a constant state of siege.',
+      emoji: '☕😴'
+    });
+  }
+
+  // No exercise but fitness-related job
+  if (exercise === 0 && ['fitness', 'athlete'].includes(job)) {
+    paradoxes.push({
+      title: 'Do As I Say...',
+      insight: 'You work in fitness but don\'t exercise regularly yourself. Like a chef who orders takeout.',
+      emoji: '💪🛋️'
+    });
+  }
+
+  // Single but has kids
+  if (relationship === 'single' && kids > 0) {
+    paradoxes.push({
+      title: 'Solo Architect',
+      insight: 'You\'re raising '+kids+' kid'+(kids>1?'s':'')+' while single. Single parents spend 2× the emotional bandwidth of partnered parents. You\'re doing the work of two.',
+      emoji: '👤👶'
+    });
+  }
+
+  // Night owl parent with young kids
+  if (chronotype === 'night' && kids > 0 && age < 45) {
+    paradoxes.push({
+      title: 'The Sleep-Deprived Night Owl',
+      insight: 'You\'re a natural night owl but have '+kids+' kid'+(kids>1?'s':'')+'. Kids wake up at dawn regardless of your chronotype. You\'re probably running on 2 hours less sleep than you need.',
+      emoji: '🦉👶'
+    });
+  }
+
+  // Older than parents were when they had you
+  if (momHadYouAt > 0 && age > momHadYouAt) {
+    paradoxes.push({
+      title: 'The Generational Shift',
+      insight: 'You\'re now '+age+', older than your mother was when she had you ('+momHadYouAt+'). You\'ve lived longer as "older than mom-as-parent" than she had lived total when you were born.',
+      emoji: '⏳'
+    });
+  }
+
+  // Great cook but unhealthy habits
+  if ((cookLevel === 'good' || cookLevel === 'pro') && (cigsPerDay > 0 || alcohol === 'daily')) {
+    paradoxes.push({
+      title: 'The Paradox Chef',
+      insight: 'You\'re a skilled cook who values quality food, but '+(cigsPerDay > 0 ? 'smoke '+cigsPerDay+' cigarettes' : 'drink daily')+'. You care what goes into your body... selectively.',
+      emoji: '👨‍🍳🚬'
+    });
+  }
+
+  // Polyglot who never traveled
+  if (languages >= 3 && passport === 'no') {
+    paradoxes.push({
+      title: 'The Armchair Polyglot',
+      insight: 'You speak '+languages+' languages but have never traveled abroad. You can communicate with billions but haven\'t visited them. The world exists in your mind.',
+      emoji: '🌍🏠'
+    });
+  }
+
+  // Has passport, speaks one language
+  if (passport === 'yes' && languages === 1) {
+    paradoxes.push({
+      title: 'The Monolingual Traveler',
+      insight: 'You\'ve traveled internationally but speak only one language. You experience the world through gestures, Google Translate, and the kindness of strangers.',
+      emoji: '✈️🤷'
+    });
+  }
+
+  // CPR certified with kids (the prepared parent)
+  if (cpr === 'yes' && kids > 0) {
+    paradoxes.push({
+      title: 'The Prepared Parent',
+      insight: 'You have '+kids+' kid'+(kids>1?'s':'')+' AND know CPR. Only 2.5% of people are CPR certified. You\'re statistically prepared to save your own child\'s life.',
+      emoji: '👶🩺'
+    });
+  }
+
+  // Lots of tattoos in conservative profession
+  if (tattoo === '6+' && ['lawyer', 'judge', 'banker', 'accountant', 'civil_servant', 'professor'].includes(job)) {
+    paradoxes.push({
+      title: 'The Hidden Canvas',
+      insight: 'You have 6+ tattoos but work as a '+jobProfile.cat.toLowerCase()+'. Strategic suit placement. Your colleagues have no idea about your secret art collection.',
+      emoji: '👔🎨'
+    });
+  }
+
+  // Left-handed musician (actually common among musicians)
+  if (hand === 'left' && instrument === 'yes') {
+    paradoxes.push({
+      title: 'The Southpaw Musician',
+      insight: 'Left-handed AND musical — you\'re in good company: Jimi Hendrix, Paul McCartney, Kurt Cobain, Lady Gaga. Left-handers are overrepresented among musicians.',
+      emoji: '🤚🎸'
+    });
+  }
+
+  // Wears glasses but is a pilot/driver
+  if (glasses === 'yes' && (job === 'pilot' || job === 'driver')) {
+    paradoxes.push({
+      title: 'Corrected Vision, Critical Job',
+      insight: 'Your profession requires sharp vision, and you depend on corrective lenses. ~75% of adults need vision correction — you\'re in the majority, but the stakes are higher.',
+      emoji: '👓✈️'
+    });
+  }
+
+  // Very religious but tattoos
+  if (religious === 'yes' && (tattoo === '2-5' || tattoo === '6+')) {
+    paradoxes.push({
+      title: 'Marked by Faith',
+      insight: 'You\'re religious with multiple tattoos. While some traditions prohibit body modification, many people use tattoos TO express faith. Your body tells your spiritual story.',
+      emoji: '🙏🖋️'
+    });
+  }
+
+  // High exercise, active job = extreme physical load
+  if (exercise >= 4 && ['construction', 'farmer', 'fitness', 'athlete', 'firefighter', 'military'].includes(job)) {
+    paradoxes.push({
+      title: 'The Physical Maximalist',
+      insight: 'You exercise '+exercise+'×/week AND have a physically demanding job. Your body does more work in a week than most people\'s do in a month. Joint health becomes critical.',
+      emoji: '💪🔥'
+    });
+  }
+
+  // Long relationship, never married
+  if (relDuration >= 5 && relationship === 'dating') {
+    paradoxes.push({
+      title: 'The Long-Term Dater',
+      insight: 'Together '+relDuration+' years but not married. You\'ve outlasted many marriages. The paper doesn\'t define the relationship — you\'ve chosen each other every day for '+Math.round(relDuration * 365)+' days.',
+      emoji: '💕📅'
+    });
+  }
+
+  // Parents divorced but long relationship (breaking the cycle)
+  if (parentsStatus === 'divorced' && relDuration >= 5) {
+    paradoxes.push({
+      title: 'Breaking the Cycle',
+      insight: 'Your parents divorced, but you\'ve been with your partner for '+relDuration+' years. Children of divorce are statistically more likely to divorce, but you\'re defying the odds.',
+      emoji: '💔➡️💕'
+    });
+  }
+
+  // Very young parent (had kids before 22)
+  const ageWhenFirstKid = kids > 0 ? age - (kids > 1 ? Math.max(...[15, age - 5]) : Math.min(age - 1, 25)) : 0; // rough estimate
+  if (kids > 0 && age <= 25 && age - 18 < 8) {
+    paradoxes.push({
+      title: 'The Young Parent',
+      insight: 'You became a parent young. While peers were figuring out life, you were responsible for another human. This accelerates maturity but can delay other milestones.',
+      emoji: '👶🎓'
+    });
+  }
+
+  // Siblings with huge age gap
+  if (siblingAges.length > 0) {
+    const maxGap = Math.max(...siblingAges.map(s => Math.abs(s - age)));
+    if (maxGap >= 12) {
+      paradoxes.push({
+        title: 'The Generation Gap Sibling',
+        insight: 'You have a sibling '+maxGap+' years apart. That\'s almost a generation gap. They were a teenager while you were in diapers (or vice versa). You had fundamentally different childhoods.',
+        emoji: '👶👨'
+      });
+    }
+  }
+
+  // No pets, lives alone, works from home = extreme isolation risk
+  if (pets === 0 && relationship === 'single' && kids === 0 && ['software_engineer', 'data_scientist', 'freelancer', 'designer', 'writer'].includes(job)) {
+    paradoxes.push({
+      title: 'The Digital Hermit',
+      insight: 'No partner, no kids, no pets, and likely a remote-friendly job. You could theoretically go days without speaking to another human. Intentionally schedule social contact.',
+      emoji: '🖥️🏠'
+    });
+  }
+
+  // Vegetarian/health-focused indicators but heavy drinker
+  if (exercise >= 4 && homeMealsPerWeek >= 14 && alcohol === 'daily') {
+    paradoxes.push({
+      title: 'The Health-Conscious Drinker',
+      insight: 'You exercise frequently, cook most meals at home, but drink daily. You care deeply about health... except for the alcohol. Classic cognitive dissonance.',
+      emoji: '🥗🍷'
+    });
+  }
+
+  // Multiple health conditions but no therapy
+  if ((healthCondition === 'multiple' || mentalHealth === 'multiple') && therapy === 'no' && psychiatrist === 'no') {
+    paradoxes.push({
+      title: 'Going It Alone',
+      insight: 'You\'re managing multiple health conditions without professional mental health support. The load you\'re carrying is significant. Support exists when you\'re ready.',
+      emoji: '💪❤️'
+    });
+  }
+
+  // Introvert indicators but extrovert job
+  const extrovertJobs = ['sales', 'actor', 'politician', 'teacher', 'hr', 'marketer', 'journalist'];
+  if (friendDaysPerWeek <= 1 && extrovertJobs.includes(job)) {
+    paradoxes.push({
+      title: 'The Performing Introvert',
+      insight: 'You see friends only '+friendDaysPerWeek+' day/week (introvert signal) but work in a social profession. You\'re "on" at work and recharge alone. This is exhausting but common.',
+      emoji: '🎭😴'
+    });
+  }
+
+  // Very few friends but in relationship long-term
+  if (friendDaysPerWeek === 0 && relationship !== 'single' && relDuration >= 3) {
+    paradoxes.push({
+      title: 'Partner as Everything',
+      insight: 'You don\'t see friends regularly but have a '+relDuration+'-year relationship. Your partner is your social world. This can be beautiful but also risky — diversify your support network.',
+      emoji: '💑🏝️'
+    });
+  }
+
+  // Knows CPR but donated blood = double life-saver potential
+  if (cpr === 'yes' && donatedBlood === 'yes') {
+    paradoxes.push({
+      title: 'The Double Life-Saver',
+      insight: 'You know CPR AND donate blood. You\'re equipped to save lives two different ways. Fewer than 0.1% of people can say this. You\'re a walking emergency resource.',
+      emoji: '🩺🩸'
+    });
+  }
+
+  // Born on weekend but works weekends
+  if (['Saturday', 'Sunday'].includes(dayOW) && ['chef', 'waiter', 'retail', 'nurse', 'doctor', 'hotel', 'barista'].includes(job)) {
+    paradoxes.push({
+      title: 'Born on Weekend, Work on Weekends',
+      insight: 'You were born on a '+dayOW+' and now work weekends. Your birthday often falls on a workday for you. The universe has a sense of irony.',
+      emoji: '📅💼'
+    });
+  }
+
+  // Ambidextrous (extremely rare)
+  if (hand === 'ambidextrous') {
+    paradoxes.push({
+      title: 'The One Percent',
+      insight: 'True ambidexterity — only 1% of people. Your brain\'s hemispheres work together unusually well. Leonardo da Vinci, Nikola Tesla, and Einstein were reportedly ambidextrous.',
+      emoji: '🙌🧠'
+    });
+  }
+
+  // Very tall woman or very short man (social dynamics)
+  if (gender === 'female' && height >= 180) {
+    paradoxes.push({
+      title: 'The Tall Woman',
+      insight: 'At '+height+'cm, you\'re taller than 99% of women AND most men. Research shows tall women face unique social dynamics — from dating to being taken more seriously in business.',
+      emoji: '👠📏'
+    });
+  }
+  if (gender === 'male' && height <= 165) {
+    paradoxes.push({
+      title: 'The Height Paradox',
+      insight: 'At '+height+'cm, you\'re shorter than average. Research shows height bias is real but also that shorter people live longer on average and have lower cancer rates. Trade-offs.',
+      emoji: '📏🧬'
+    });
+  }
+
+  // Water intake way below recommendation
+  if (waterBottlesPerDay <= 2 && weight >= 70) {
+    paradoxes.push({
+      title: 'The Dehydrated',
+      insight: 'At '+weight+'kg, you need ~'+Math.round(weight * 35 / 500)+' water bottles daily but drink only '+waterBottlesPerDay+'. You\'re chronically dehydrated. Fatigue, headaches, poor concentration — some of your problems might just be thirst.',
+      emoji: '💧😓'
+    });
+  }
+
+  // Coffee replaces water
+  if (myCoffee >= 4 && waterBottlesPerDay <= 2) {
+    paradoxes.push({
+      title: 'Caffeinated, Not Hydrated',
+      insight: 'You drink '+myCoffee+' coffees but only '+waterBottlesPerDay+' bottles of water. Coffee is a diuretic. Your net hydration might be negative. Your kidneys would like a word.',
+      emoji: '☕💧'
+    });
+  }
+
+  // ─── YOUR LIFETIME WEALTH EQUATION ───
+  // Combining: job, education, age, smoking, coffee, alcohol, cooking habits
+  const lifetimeEarnings = {
+    base: jobProfile.salary ? parseInt(jobProfile.salary.replace(/[^0-9-]/g,'').split('-')[0]) * 1000 || 40000 : 40000,
+    eduMultiplier: edu.earningMult,
+    yearsRemaining: Math.max(0, jobProfile.retireAge - age),
+  };
+  const projectedLifetimeEarnings = Math.round(lifetimeEarnings.base * lifetimeEarnings.eduMultiplier * lifetimeEarnings.yearsRemaining);
+  
+  const moneyBurned = {
+    smoking: cigsPerDay > 0 ? Math.round(cigsPerDay * 365 * 0.5 * age * 0.5) : 0, // $0.50/cig since ~half your life
+    coffee: Math.round(myCoffee * 4 * 365 * Math.max(0, age - 16)), // $4/coffee since 16
+    alcohol: alcohol === 'daily' ? Math.round(10 * 365 * Math.max(0, age - 18)) : 
+             alcohol === 'regular' ? Math.round(10 * 4 * 52 * Math.max(0, age - 18)) :
+             alcohol === 'social' ? Math.round(10 * 1.5 * 52 * Math.max(0, age - 18)) : 0,
+    takeout: Math.round((21 - homeMealsPerWeek) * 12 * 52 * Math.max(0, age - 16)), // $12 per takeout meal
+  };
+  const totalBurned = Object.values(moneyBurned).reduce((a, b) => a + b, 0);
+
+  // ─── YOUR STATISTICAL RARITY ───
+  // Which of your traits are actually rare?
+  const traitRarities = [
+    { trait: 'Blood type '+blood, rarity: myBlood.pct, category: 'biology' },
+    { trait: hand+'-handed', rarity: handPct, category: 'biology' },
+    { trait: eyes+' eyes', rarity: myEyes.pct, category: 'biology' },
+    { trait: edu.label, rarity: edu.pct, category: 'achievement' },
+    { trait: 'Speaks '+languages+' language'+(languages>1?'s':''), rarity: langPct, category: 'achievement' },
+    { trait: 'Plays instrument', rarity: instrument === 'yes' ? instrumentPct : 100-instrumentPct, category: 'skill' },
+    { trait: 'Knows CPR', rarity: cpr === 'yes' ? cprPct : 100-cprPct, category: 'skill' },
+    { trait: religious === 'yes' ? 'Religious' : religious === 'spiritual' ? 'Spiritual' : 'Not religious', 
+      rarity: religious === 'yes' ? religiousPct : religious === 'spiritual' ? spiritualPct : notReligiousPct, category: 'worldview' },
+    { trait: 'In therapy', rarity: therapy === 'currently' ? 5 : therapy === 'past' ? therapyPct : 100-therapyPct, category: 'health' },
+  ].filter(t => t.rarity < 20).sort((a, b) => a.rarity - b.rarity);
+
+  const rarestTrait = traitRarities[0];
+  const mostCommonTrait = [...traitRarities].sort((a, b) => b.rarity - a.rarity)[0];
+
+  // ─── YOUR LIFE IN ONE NUMBER ───
+  // A single "life complexity score" combining everything
+  const lifeComplexity = (
+    (siblings + 1) * 2 + // family size
+    (kids * 5) + // kids add complexity
+    (languages * 3) + // each language
+    (tat.count * 2) + // tattoos as life experiences
+    (passport === 'yes' ? countriesVisited : 0) + // travel
+    (relationship !== 'single' ? relDuration * 2 : 0) + // relationship depth
+    (healthCondition !== 'no' ? 5 : 0) + (mentalHealth !== 'no' ? 5 : 0) + // health challenges
+    (therapy === 'currently' || therapy === 'past' ? 3 : 0) + // self-work
+    (pets * 2) + // pet responsibilities
+    Math.min(age, 50) // life experience caps at 50
+  );
+  const lifeComplexityPercentile = lifeComplexity >= 80 ? 95 : lifeComplexity >= 60 ? 80 : lifeComplexity >= 40 ? 60 : lifeComplexity >= 20 ? 40 : 20;
+
+  // ─── DEEP CROSS-CORRELATIONS ───
+  // Non-paradox insights that combine data in interesting ways
+
+  // Time remaining with living parents (if alive)
+  const timeWithMom = momAlive === 'alive' && momAge > 0 ? {
+    yearsLeft: Math.max(0, (gender === 'female' ? 84 : 78) - momAge), // mom's LE
+    visitsPerYear: 12, // assume monthly
+    totalVisitsRemaining: Math.max(0, ((gender === 'female' ? 84 : 78) - momAge)) * 12
+  } : null;
+  const timeWithDad = dadAlive === 'alive' && dadAge > 0 ? {
+    yearsLeft: Math.max(0, (gender === 'male' ? 76 : 74) - dadAge), // dad's LE  
+    visitsPerYear: 12,
+    totalVisitsRemaining: Math.max(0, ((gender === 'male' ? 76 : 74) - dadAge)) * 12
+  } : null;
+
+  // Your chronological position in family
+  const familyPosition = {
+    olderThanMomWas: momHadYouAt > 0 && age > momHadYouAt,
+    olderThanDadWas: dadHadYouAt > 0 && age > dadHadYouAt,
+    parentYoungerThanGrandparentWas: momAge > 0 && momHadYouAt > 0 && age + momHadYouAt > momAge
+  };
+
+  // Your "biological efficiency" score
+  const bioEfficiency = {
+    sleepEfficiency: sleepHrs >= 7 && sleepHrs <= 8 ? 'optimal' : sleepHrs >= 6 ? 'adequate' : 'suboptimal',
+    hydrationEfficiency: waterPctOfRecommended >= 100 ? 'optimal' : waterPctOfRecommended >= 70 ? 'adequate' : 'suboptimal',
+    exerciseEfficiency: exercise >= 3 ? 'optimal' : exercise >= 1 ? 'adequate' : 'suboptimal',
+    nutritionProxy: homeMealsPerWeek >= 14 ? 'optimal' : homeMealsPerWeek >= 7 ? 'adequate' : 'suboptimal'
+  };
+  const optimalCount = Object.values(bioEfficiency).filter(v => v === 'optimal').length;
+  const bioEfficiencyScore = optimalCount === 4 ? 'Peak' : optimalCount >= 3 ? 'High' : optimalCount >= 2 ? 'Moderate' : optimalCount >= 1 ? 'Low' : 'Critical';
+
+  // Your "social capital" calculation
+  const socialCapital = {
+    familyTies: (momAlive === 'alive' ? 2 : 0) + (dadAlive === 'alive' ? 2 : 0) + siblings + kids,
+    romanticBond: relationship === 'married' ? 5 : relationship === 'dating' ? 3 : 0,
+    friendshipStrength: friendDaysPerWeek * 2,
+    petCompanionship: pets,
+    communityTies: religious === 'yes' ? 3 : religious === 'spiritual' ? 1 : 0,
+    professionalNetwork: ['executive', 'manager', 'consultant', 'sales', 'hr', 'entrepreneur'].includes(job) ? 3 : 1
+  };
+  const totalSocialCapital = Object.values(socialCapital).reduce((a, b) => a + b, 0);
+  const socialCapitalPercentile = totalSocialCapital >= 20 ? 95 : totalSocialCapital >= 15 ? 80 : totalSocialCapital >= 10 ? 60 : totalSocialCapital >= 5 ? 40 : 20;
+
+  // Your "life stage" analysis
+  const lifeStage = age < 25 ? {
+    stage: 'Exploration',
+    description: 'Identity formation, trying different paths',
+    primaryTasks: 'Education, first relationships, career exploration',
+    avgProgress: education === 'bachelor' || education === 'master' || education === 'phd' ? 'Ahead of curve' : 'On track'
+  } : age < 35 ? {
+    stage: 'Building',
+    description: 'Establishing career, relationships, possibly family',
+    primaryTasks: 'Career advancement, partnership decisions, financial foundation',
+    avgProgress: (relationship !== 'single' || kids > 0 || ['manager', 'executive', 'entrepreneur'].includes(job)) ? 'On track' : 'Taking your time (increasingly common)'
+  } : age < 50 ? {
+    stage: 'Mid-Journey',
+    description: 'Peak earning years, raising family, questioning meaning',
+    primaryTasks: 'Leadership, parenting teens, dealing with aging parents',
+    avgProgress: 'Everyone\'s path is different at this stage'
+  } : age < 65 ? {
+    stage: 'Harvesting',
+    description: 'Reaping career rewards, kids leaving, planning next chapter',
+    primaryTasks: 'Mentoring, health maintenance, retirement planning',
+    avgProgress: 'Wisdom accumulation phase'
+  } : {
+    stage: 'Legacy',
+    description: 'Sharing wisdom, focusing on what matters most',
+    primaryTasks: 'Health, relationships, meaning, giving back',
+    avgProgress: 'Each day is a gift'
+  };
+
+  // Your "efficiency multiplier" for life
+  // How much does each hour of your effort compound?
+  const efficiencyMultipliers = {
+    education: edu.earningMult,
+    health: healthDiff < 0 ? 1.1 : healthDiff > 5 ? 0.85 : 1.0,
+    socialSupport: totalSocialCapital >= 15 ? 1.1 : totalSocialCapital < 5 ? 0.9 : 1.0,
+    location: ci && ci.population > 1000000 ? 1.15 : ci && ci.population > 100000 ? 1.05 : 1.0,
+    cognitiveTools: languages >= 2 ? 1.05 : 1.0
+  };
+  const totalMultiplier = Object.values(efficiencyMultipliers).reduce((a, b) => a * b, 1);
+
+  // Compare your trajectory to statistical average
+  const trajectoryComparison = {
+    healthVsAvg: healthDiff < 0 ? 'Better than average' : healthDiff > 3 ? 'Below average' : 'Average',
+    wealthProxy: projectedLifetimeEarnings > 2000000 ? 'Above average' : projectedLifetimeEarnings < 800000 ? 'Below average' : 'Average',
+    socialVsAvg: totalSocialCapital >= 15 ? 'Above average' : totalSocialCapital < 8 ? 'Below average' : 'Average',
+    skillVsAvg: skillCount >= 6 ? 'Above average' : skillCount < 4 ? 'Below average' : 'Average'
+  };
+
+  // "Your Life in Headlines" - interesting facts derived from combinations
+  const headlines = [];
+  
+  if (timeWithMom && timeWithMom.yearsLeft < 15) {
+    headlines.push({
+      headline: '~'+timeWithMom.totalVisitsRemaining+' visits with mom remaining',
+      subtext: 'If you see her monthly, you have approximately '+timeWithMom.yearsLeft+' years. Make them count.',
+      emoji: '👩'
+    });
+  }
+  if (timeWithDad && timeWithDad.yearsLeft < 15) {
+    headlines.push({
+      headline: '~'+timeWithDad.totalVisitsRemaining+' visits with dad remaining',
+      subtext: 'Based on life expectancy and assuming monthly visits. Call him.',
+      emoji: '👨'
+    });
+  }
+  if (yrsLeft < 50) {
+    const fridaysRemaining = yrsLeft * 52;
+    const summerLeft = yrsLeft;
+    headlines.push({
+      headline: 'Only '+fmtE(fridaysRemaining)+' Fridays left',
+      subtext: 'And '+summerLeft+' summers. Every weekend matters.',
+      emoji: '📅'
+    });
+  }
+  if (totalMultiplier > 1.2) {
+    headlines.push({
+      headline: 'Efficiency Multiplier: '+totalMultiplier.toFixed(2)+'×',
+      subtext: 'Your combination of education, location, languages, and health means each hour of your effort is worth '+Math.round((totalMultiplier-1)*100)+'% more than average.',
+      emoji: '⚡'
+    });
+  }
+  if (cigsPerDay > 0) {
+    const daysLost = Math.round(cigsPerDay * 11 * 365 * yrsLeft / 1440);
+    headlines.push({
+      headline: yearsLostSmoking + ' years of life at stake',
+      subtext: 'At '+cigsPerDay+' cigarettes/day, you\'ll lose ~'+daysLost+' days of life if you continue. Quit date = instant life extension.',
+      emoji: '🚬'
+    });
+  }
+  if (instrument === 'yes' && practiceHoursEst >= 5000) {
+    headlines.push({
+      headline: Math.round(practiceHoursEst/masteryThreshold*100)+'% to mastery',
+      subtext: 'You\'ve practiced ~'+fmtE(practiceHoursEst)+' hours. The 10,000-hour mark is '+(masteryThreshold - practiceHoursEst > 0 ? fmtE(masteryThreshold - practiceHoursEst)+' hours away' : 'behind you — you\'re a master')+'.',
+      emoji: '🎸'
+    });
+  }
+  if (kids > 0 && age < 50) {
+    const kidsAtHome = kids; // rough estimate
+    const yearsUntilEmpty = 18 - (age - (age - 18)); // very rough
+    headlines.push({
+      headline: fmtE(Math.round(kidsTimeHrs))+' hours parenting so far',
+      subtext: 'And counting. The days are long but the years are short.',
+      emoji: '👶'
+    });
+  }
+  if (education === 'phd' && age < 35) {
+    headlines.push({
+      headline: 'PhD by '+age+' — top 0.1%',
+      subtext: 'You\'ve spent ~'+edu.years+' years in formal education. You\'re among the most educated people on the planet.',
+      emoji: '🎓'
+    });
+  }
+  if (glasses === 'no' && age > 40) {
+    headlines.push({
+      headline: 'No glasses at '+age+' — increasingly rare',
+      subtext: '75% of adults need vision correction by your age. Your eyes have held up exceptionally well.',
+      emoji: '👁️'
+    });
+  }
+  if (siblings === 0 && kids >= 3) {
+    headlines.push({
+      headline: 'Only child raising '+kids+' kids',
+      subtext: 'You had no sibling experience to draw from, yet you\'re creating a big family. Learning everything from scratch.',
+      emoji: '👤➡️👨‍👩‍👧‍👦'
+    });
+  }
+
+  // ─── YOUR "TWIN" PROBABILITY ───
+  // What's the probability someone else matches your exact profile?
+  const twinProbability = (
+    (namePop / WORLD_POP) * // name
+    (1 / 80) * // age (assume 80 year spread)
+    0.5 * // gender
+    (myBlood.pct / 100) * // blood type
+    (handPct / 100) * // handedness
+    (myEyes.pct / 100) * // eye color
+    (edu.pct / 100) * // education level
+    (langPct / 100) * // languages
+    (jobProfile.global ? jobProfile.global / 3500000000 : 0.01) // profession (of working population)
+  );
+  const estimatedTwins = Math.max(0.001, Math.round(twinProbability * WORLD_POP * 1000) / 1000);
+  const twinDescription = estimatedTwins < 1 ? 'You are statistically one-of-a-kind' :
+                          estimatedTwins < 10 ? 'Fewer than 10 people on Earth match your profile' :
+                          estimatedTwins < 100 ? 'About '+Math.round(estimatedTwins)+' people share your exact combination' :
+                          'Approximately '+fmtE(Math.round(estimatedTwins))+' statistical twins exist';
   // Build factors list
   const healthFactors = [];
   if (exerciseOffset < 0) healthFactors.push({factor: exercise+'×/week exercise', impact: exerciseOffset, emoji: '🏋️'});
@@ -1966,11 +2758,45 @@ function generateResults(name, age, gender, bdStr, city, height, weight, job, si
   h += cardS(fmt(Math.round(namePop/365)),name+'s born every day','color-pink');
   h += cardS('1 in '+fmt(Math.round(WORLD_POP/namePop)),'chance a stranger is named '+name,'color-cyan');
   h += '</div>';
-  if(nameCountries.length>0){
-    const topC = nameCountries.slice(0,3).map(c=>(COUNTRIES[c.id]||c.id)+' ('+Math.round(c.prob*100)+'%)').join(', ');
-    h += card('Most common in:','<strong>'+topC+'</strong>','color-blue');
-  }
-  if(nameData.db_count>0){
+  
+  // Show REAL forebears.io data for user's country
+  // fb is already declared above, userCountryCode will be declared here for this section
+  const userCountryCodeName = ci ? ci.countryCode : '';
+  const userCountryName = ci ? ci.country : '';
+  
+  if (fb && fb.countries && fb.countries.length > 0) {
+    // Find user's country in the forebears data
+    const fbUserCountry = fb.countries.find(c => c.iso === userCountryCodeName);
+    
+    if (fbUserCountry && fbUserCountry.incidence > 0) {
+      const countryPop = COUNTRY_POP[userCountryCodeName] || 50000000;
+      const pctInCountry = ((fbUserCountry.incidence / countryPop) * 100).toFixed(4);
+      const oneInX = Math.round(countryPop / fbUserCountry.incidence);
+      h += card(fmtE(fbUserCountry.incidence)+' people in '+userCountryName,'are named <strong>'+name+'</strong> — that\'s 1 in '+fmt(oneInX)+' people ('+pctInCountry+'% of population)','color-blue');
+      
+      // Show what % of all people named this live in user's country
+      if (fb.world > 0) {
+        const pctOfAll = ((fbUserCountry.incidence / fb.world) * 100).toFixed(1);
+        h += card(pctOfAll+'%','of all '+name+'s in the world live in '+userCountryName,'color-orange');
+      }
+    }
+    
+    // Show top 3 countries where this name is ACTUALLY most common (real data)
+    const topCountries = fb.countries
+      .filter(c => c.incidence > 0)
+      .sort((a, b) => b.incidence - a.incidence)
+      .slice(0, 3);
+    
+    if (topCountries.length > 0) {
+      const topCountriesStr = topCountries.map(c => {
+        const countryName = COUNTRIES[c.iso] || c.iso;
+        return '<strong>' + countryName + '</strong> (' + fmtE(c.incidence) + ')';
+      }).join(', ');
+      h += card('🌍 Most '+name+'s live in:',topCountriesStr,'color-green');
+    }
+    
+    h += src('📊 Source: forebears.io (4 billion person database, verified census data)');
+  } else if(nameData.db_count>0){
     h += src('📊 Source: ' + nameData.source);
   }
   h += '</div>';
@@ -2083,6 +2909,256 @@ function generateResults(name, age, gender, bdStr, city, height, weight, job, si
   else if(estMatches<10000) h += card('✨ Rare','fewer than 10,000 — could fill a small stadium','color-blue');
   else h += card('🌍 Uncommon',fmtE(estMatches)+' matches — still less than 0.001% of humanity','color-cyan');
   h += src('📊 Data: ' + nameFreqSource + '. Local freq: '+localNameFreq.toExponential(2)+'. cityPop ('+fmtE(cityPop)+') × freq × 1/80 ages × 0.5 gender');
+  h += '</div>';
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // 🧠 DEEP ANALYSIS — Cross-referential insights from all your data
+  // ══════════════════════════════════════════════════════════════════════════
+
+  // ── YOUR STATISTICAL TWIN ──
+  h += '<div class="category anim" style="animation-delay:.22s">';
+  h += '<div class="cat-header"><span class="cat-icon">👯</span><span class="cat-title">Your Statistical Twin</span></div>';
+  h += card(estimatedTwins < 1 ? '< 1' : '~'+fmtE(Math.round(estimatedTwins)), twinDescription, estimatedTwins < 10 ? 'color-pink' : 'color-accent');
+  h += card('🧬 Calculation', 'Name frequency ('+((namePop/WORLD_POP)*100).toFixed(4)+'%) × age (1/80) × gender (50%) × blood type ('+myBlood.pct+'%) × handedness ('+handPct+'%) × eye color ('+myEyes.pct+'%) × education ('+edu.pct+'%) × profession ('+(jobProfile.global ? ((jobProfile.global/3500000000)*100).toFixed(3) : '1')+'%)', 'color-blue');
+  if (rarestTrait) {
+    h += card('💎 Your Rarest Trait', rarestTrait.trait + ' — only ' + rarestTrait.rarity + '% of people share this', 'color-green');
+  }
+  h += src('📊 Probability calculation based on independent trait frequencies');
+  h += '</div>';
+
+  // ── YOUR PSYCHOLOGICAL PROFILE ──
+  h += '<div class="category anim" style="animation-delay:.23s">';
+  h += '<div class="cat-header"><span class="cat-icon">🧠</span><span class="cat-title">Your Psychological Profile</span></div>';
+  h += card('🏠 Attachment Foundation', psychProfile.attachmentStyle === 'secure-leaning' ? 
+    'Parents together, both alive — research shows this correlates with secure attachment styles and easier relationship formation in adulthood' :
+    psychProfile.attachmentStyle === 'may have developed independence early' ?
+    'Parents divorced/separated — children of divorce often develop strong independence and adaptability, but may need to consciously build trust in relationships' :
+    psychProfile.attachmentStyle === 'experienced early loss' ?
+    'Experienced parental loss — this shapes a person profoundly, often creating deep empathy and resilience, but also requiring intentional grief processing' :
+    'Mixed family background — your attachment style was shaped by unique circumstances', 'color-accent');
+  
+  if (psychProfile.birthOrderTraits) {
+    h += card('👶 Birth Order Effect: '+birthOrderFromSiblings.charAt(0).toUpperCase()+birthOrderFromSiblings.slice(1), psychProfile.birthOrderTraits + '. Research by Sulloway (1996) shows birth order affects personality more than most factors except gender.', 'color-blue');
+  }
+  
+  h += card('🧘 Coping Strategy', 
+    psychProfile.copingStrategy === 'actively processing' ? 'You\'re currently in therapy/psychiatric care — this indicates high self-awareness and proactive mental health management. Only ~5% of adults are actively in treatment.' :
+    psychProfile.copingStrategy === 'has sought help before' ? 'You\'ve sought professional help before — you know when to reach out, a skill many never develop.' :
+    psychProfile.copingStrategy === 'may use faith as framework' ? 'You may process life through a religious framework — faith provides meaning-making structures that reduce anxiety and increase life satisfaction (per Pew Research).' :
+    psychProfile.copingStrategy === 'spiritually-oriented coping' ? 'You lean spiritual without formal religion — this often means you\'ve constructed your own meaning-making framework.' :
+    'Self-reliant coping approach — you handle things internally, which builds resilience but watch for when problems exceed solo capacity.', 'color-pink');
+  
+  h += card('👥 Social Orientation: '+psychProfile.socialOrientation.charAt(0).toUpperCase()+psychProfile.socialOrientation.slice(1), 
+    psychProfile.socialOrientation === 'highly social' ? 'Strong romantic bond + frequent friend contact. Your social battery is large. Studies show this adds 7+ years to life expectancy.' :
+    psychProfile.socialOrientation === 'balanced social' ? 'You have meaningful connections without overextending. This is the sweet spot for most personalities.' :
+    psychProfile.socialOrientation === 'independent/introverted' ? 'You recharge alone. This is healthy if chosen, but ensure some deep connections exist — loneliness is as harmful as smoking 15 cigarettes/day.' :
+    'You choose social interactions carefully. Quality over quantity.', 'color-green');
+  h += src('📊 Source: Attachment theory (Bowlby), birth order research (Sulloway), social connection studies (Holt-Lunstad)');
+  h += '</div>';
+
+  // ── YOUR COGNITIVE PROFILE ──
+  h += '<div class="category anim" style="animation-delay:.24s">';
+  h += '<div class="cat-header"><span class="cat-icon">🎯</span><span class="cat-title">Your Cognitive Profile</span></div>';
+  h += card('Cognitive Complexity Score: '+cognitiveScore+'/15', 'Top '+cognitivePercentile+'% based on languages, education, musical training, handedness, and profession type', cognitivePercentile >= 90 ? 'color-pink' : cognitivePercentile >= 70 ? 'color-green' : 'color-accent');
+  if (cognitiveProfile.strengths.length > 0) {
+    h += card('🧬 Your Cognitive Advantages', cognitiveProfile.strengths.join(' • '), 'color-blue');
+  }
+  if (languages >= 2) {
+    h += card('🌍 Bilingual/Multilingual Brain', 'Speaking '+languages+' languages gives you: delayed dementia onset (4-5 years), enhanced executive function, better multitasking, and denser gray matter in language regions. Your brain literally has more neural pathways.', 'color-green');
+  }
+  if (instrument === 'yes' && education === 'phd') {
+    h += card('🎵🎓 Rare Combination', 'Musical training + PhD — you have both creative and analytical neural development. Only ~0.1% of the population has this combination.', 'color-pink');
+  }
+  if (hand === 'left') {
+    h += card('🤚 Left-Handed Advantage', 'Your right brain hemisphere is more active. Left-handers are overrepresented among architects, musicians, and mathematicians. 6 of the last 15 US presidents were left-handed (40% vs 10% population rate).', 'color-orange');
+  }
+  h += src('📊 Source: Cognitive neuroscience research, bilingualism studies (Bialystok), musical training research');
+  h += '</div>';
+
+  // ── YOUR RESILIENCE INDEX ──
+  h += '<div class="category anim" style="animation-delay:.25s">';
+  h += '<div class="cat-header"><span class="cat-icon">💪</span><span class="cat-title">Your Resilience Index</span></div>';
+  const resilienceColor = resiliencePercentile >= 80 ? 'color-green' : resiliencePercentile >= 50 ? 'color-blue' : 'color-orange';
+  h += card('Resilience Score: '+resilienceTotal.toFixed(1), 'Top '+resiliencePercentile+'% — combining physical health, psychological resources, social support, spiritual grounding, and practical skills', resilienceColor);
+  h += '<div class="fact-row">';
+  h += cardS(resilienceFactors.physical.toFixed(1), 'Physical', resilienceFactors.physical >= 3 ? 'color-green' : 'color-orange');
+  h += cardS(resilienceFactors.psychological.toFixed(1), 'Psychological', resilienceFactors.psychological >= 2 ? 'color-green' : 'color-orange');
+  h += '</div>';
+  h += '<div class="fact-row">';
+  h += cardS(resilienceFactors.social.toFixed(1), 'Social', resilienceFactors.social >= 2 ? 'color-green' : 'color-orange');
+  h += cardS(resilienceFactors.spiritual.toFixed(1), 'Spiritual', 'color-blue');
+  h += '</div>';
+  const lowestResilience = Object.entries(resilienceFactors).sort((a,b) => a[1] - b[1])[0];
+  if (lowestResilience[1] < 1) {
+    h += card('⚠️ Resilience Gap: '+lowestResilience[0].charAt(0).toUpperCase()+lowestResilience[0].slice(1), 'This is your lowest resilience factor. When life gets hard, this is where you\'re most vulnerable. Consider strengthening this area.', 'color-orange');
+  }
+  h += src('📊 Resilience factors based on APA resilience research, social support studies');
+  h += '</div>';
+
+  // ── YOUR PARADOXES ──
+  if (paradoxes.length > 0) {
+    h += '<div class="category anim" style="animation-delay:.26s">';
+    h += '<div class="cat-header"><span class="cat-icon">⚡</span><span class="cat-title">Your Life Paradoxes</span></div>';
+    h += card(paradoxes.length + ' paradox' + (paradoxes.length > 1 ? 'es' : '') + ' detected', 'Cross-referencing your data reveals interesting contradictions — because humans are beautifully inconsistent', 'color-accent');
+    paradoxes.forEach(function(p) {
+      h += card(p.emoji + ' ' + p.title, p.insight, 'color-orange');
+    });
+    h += src('📊 Analysis: Cross-referenced all your inputs against each other');
+    h += '</div>';
+  }
+
+  // ── YOUR LIFETIME WEALTH EQUATION ──
+  h += '<div class="category anim" style="animation-delay:.27s">';
+  h += '<div class="cat-header"><span class="cat-icon">💰</span><span class="cat-title">Your Lifetime Wealth Equation</span></div>';
+  h += card('~$'+fmtE(projectedLifetimeEarnings), 'projected remaining lifetime earnings based on your profession ('+jobProfile.cat+') × education multiplier ('+edu.earningMult+'×) × '+lifetimeEarnings.yearsRemaining+' working years left', 'color-green');
+  h += card('$'+fmtE(totalBurned)+' burned', 'money spent on habits over your lifetime so far', 'color-red');
+  if (moneyBurned.smoking > 0) {
+    h += card('🚬 $'+fmtE(moneyBurned.smoking)+' on cigarettes', 'and you\'ll spend another $'+fmtE(Math.round(cigsPerDay * 365 * 0.5 * yrsLeft))+' more if you continue. Total lifetime: $'+fmtE(moneyBurned.smoking + Math.round(cigsPerDay * 365 * 0.5 * yrsLeft)), 'color-orange');
+  }
+  if (moneyBurned.coffee > 1000) {
+    h += card('☕ $'+fmtE(moneyBurned.coffee)+' on coffee', myCoffee+' cups/day × $4 × '+(age > 16 ? age - 16 : 0)+' years. That\'s '+(Math.round(moneyBurned.coffee / 20000))+' months of rent in caffeine.', 'color-pink');
+  }
+  if (moneyBurned.takeout > 5000) {
+    h += card('🍔 $'+fmtE(moneyBurned.takeout)+' on takeout/restaurants', (21 - homeMealsPerWeek)+' non-home meals/week × ~$12 each. Cooking '+homeMealsPerWeek+' meals at home saves you $'+fmtE(Math.round(homeMealsPerWeek * 8 * 52))+'/year.', 'color-cyan');
+  }
+  const investedInstead = Math.round(totalBurned * Math.pow(1.07, 20)); // if invested at 7% for 20 years
+  h += card('📈 If invested instead...', '$'+fmtE(totalBurned)+' at 7% return over 20 years = $'+fmtE(investedInstead)+'. Not judging, just math.', 'color-blue');
+  h += src('📊 Based on your stated habits, average costs, compound interest at 7%');
+  h += '</div>';
+
+  // ── YOUR LIFE COMPLEXITY SCORE ──
+  h += '<div class="category anim" style="animation-delay:.28s">';
+  h += '<div class="cat-header"><span class="cat-icon">🌀</span><span class="cat-title">Your Life Complexity Score</span></div>';
+  h += card('Complexity Index: '+lifeComplexity, 'Top '+lifeComplexityPercentile+'% — combining family size, responsibilities, experiences, languages, travel, relationships, health challenges, and self-development work', lifeComplexityPercentile >= 80 ? 'color-pink' : 'color-accent');
+  const complexityBreakdown = [];
+  if (kids > 0) complexityBreakdown.push(kids+' kid'+(kids>1?'s':'')+' (+'+kids*5+')');
+  if (languages > 1) complexityBreakdown.push(languages+' languages (+'+languages*3+')');
+  if (siblings > 0) complexityBreakdown.push(siblings+' sibling'+(siblings>1?'s':'')+' (+'+(siblings+1)*2+')');
+  if (pets > 0) complexityBreakdown.push(pets+' pet'+(pets>1?'s':'')+' (+'+pets*2+')');
+  if (healthCondition !== 'no') complexityBreakdown.push('health challenges (+5)');
+  if (mentalHealth !== 'no') complexityBreakdown.push('mental health journey (+5)');
+  if (therapy === 'currently' || therapy === 'past') complexityBreakdown.push('therapy work (+3)');
+  if (passport === 'yes' && countriesVisited > 5) complexityBreakdown.push(countriesVisited+' countries (+'+countriesVisited+')');
+  if (complexityBreakdown.length > 0) {
+    h += card('📊 Complexity Factors', complexityBreakdown.join(' • '), 'color-blue');
+  }
+  const simpleLife = lifeComplexityPercentile < 40;
+  const complexLife = lifeComplexityPercentile >= 70;
+  if (simpleLife) {
+    h += card('🧘 The Simple Life', 'Lower complexity isn\'t worse — it often means more focus, less stress, and clearer priorities. Marie Kondo would approve.', 'color-green');
+  }
+  if (complexLife) {
+    h += card('🎭 The Rich Tapestry', 'High complexity means you\'re juggling many threads. This builds cognitive flexibility but requires strong organization. Your brain is working harder than most.', 'color-orange');
+  }
+  h += src('📊 Complexity factors weighted by research on cognitive load and life demands');
+  h += '</div>';
+
+  // ── YOUR LIFE HEADLINES ──
+  if (headlines.length > 0) {
+    h += '<div class="category anim" style="animation-delay:.29s">';
+    h += '<div class="cat-header"><span class="cat-icon">📰</span><span class="cat-title">Your Life Headlines</span></div>';
+    h += card(headlines.length+' insights', 'Derived from cross-referencing all your data — things that stand out about your specific situation', 'color-accent');
+    headlines.forEach(function(hl) {
+      h += card(hl.emoji+' '+hl.headline, hl.subtext, 'color-pink');
+    });
+    h += src('📊 Calculated from your specific data combinations');
+    h += '</div>';
+  }
+
+  // ── YOUR BIOLOGICAL EFFICIENCY ──
+  h += '<div class="category anim" style="animation-delay:.30s">';
+  h += '<div class="cat-header"><span class="cat-icon">⚡</span><span class="cat-title">Your Biological Efficiency</span></div>';
+  const bioColor = bioEfficiencyScore === 'Peak' ? 'color-green' : bioEfficiencyScore === 'High' ? 'color-blue' : bioEfficiencyScore === 'Moderate' ? 'color-orange' : 'color-red';
+  h += card('System Status: '+bioEfficiencyScore, optimalCount+'/4 systems optimal. Your body is a machine — this is how well you\'re maintaining it.', bioColor);
+  h += '<div class="fact-row">';
+  h += cardS(bioEfficiency.sleepEfficiency, 'Sleep ('+sleepHrs+'h)', bioEfficiency.sleepEfficiency === 'optimal' ? 'color-green' : 'color-orange');
+  h += cardS(bioEfficiency.hydrationEfficiency, 'Hydration ('+waterBottlesPerDay+'×)', bioEfficiency.hydrationEfficiency === 'optimal' ? 'color-green' : 'color-orange');
+  h += '</div>';
+  h += '<div class="fact-row">';
+  h += cardS(bioEfficiency.exerciseEfficiency, 'Exercise ('+exercise+'×/wk)', bioEfficiency.exerciseEfficiency === 'optimal' ? 'color-green' : 'color-orange');
+  h += cardS(bioEfficiency.nutritionProxy, 'Nutrition ('+homeMealsPerWeek+' home)', bioEfficiency.nutritionProxy === 'optimal' ? 'color-green' : 'color-orange');
+  h += '</div>';
+  if (optimalCount < 4) {
+    const suboptimalSystems = Object.entries(bioEfficiency).filter(([k, v]) => v !== 'optimal').map(([k, v]) => k.replace('Efficiency', '').replace('Proxy', ''));
+    h += card('🎯 Optimization Targets', 'Focus on: '+suboptimalSystems.join(', ')+'. Small improvements here have disproportionate returns.', 'color-orange');
+  }
+  h += src('📊 Based on WHO, sleep research, and nutritional science thresholds');
+  h += '</div>';
+
+  // ── YOUR SOCIAL CAPITAL ──
+  h += '<div class="category anim" style="animation-delay:.31s">';
+  h += '<div class="cat-header"><span class="cat-icon">🤝</span><span class="cat-title">Your Social Capital</span></div>';
+  const scColor = socialCapitalPercentile >= 80 ? 'color-green' : socialCapitalPercentile >= 50 ? 'color-blue' : 'color-orange';
+  h += card('Social Capital Score: '+totalSocialCapital, 'Top '+socialCapitalPercentile+'% — your network of support and connection. Research shows social capital predicts wellbeing better than income.', scColor);
+  h += '<div class="fact-row">';
+  h += cardS(socialCapital.familyTies, 'Family ties', 'color-pink');
+  h += cardS(socialCapital.romanticBond, 'Romantic bond', 'color-red');
+  h += '</div>';
+  h += '<div class="fact-row">';
+  h += cardS(socialCapital.friendshipStrength, 'Friendships', 'color-blue');
+  h += cardS(socialCapital.communityTies, 'Community', 'color-green');
+  h += '</div>';
+  if (totalSocialCapital < 10) {
+    h += card('⚠️ Social Wealth Gap', 'Your social capital is below the resilience threshold. This is the most important metric to improve — loneliness affects health as much as smoking.', 'color-red');
+  }
+  if (momAlive === 'passed' && dadAlive === 'passed' && siblings === 0) {
+    h += card('💔 Family Loss', 'Both parents gone and no siblings. Your original family support system is no longer available. Building chosen family becomes critical.', 'color-orange');
+  }
+  h += src('📊 Social capital research (Putnam), loneliness studies (Holt-Lunstad)');
+  h += '</div>';
+
+  // ── YOUR LIFE STAGE ──
+  h += '<div class="category anim" style="animation-delay:.32s">';
+  h += '<div class="cat-header"><span class="cat-icon">🎯</span><span class="cat-title">Your Life Stage</span></div>';
+  h += card('Stage: '+lifeStage.stage+' ('+age+')', lifeStage.description, 'color-accent');
+  h += card('📋 Primary Tasks', lifeStage.primaryTasks, 'color-blue');
+  h += card('📊 Your Progress', lifeStage.avgProgress, 'color-green');
+  h += src('📊 Life stage models (Erikson, Levinson)');
+  h += '</div>';
+
+  // ── YOUR EFFICIENCY MULTIPLIER ──
+  h += '<div class="category anim" style="animation-delay:.33s">';
+  h += '<div class="cat-header"><span class="cat-icon">📈</span><span class="cat-title">Your Efficiency Multiplier</span></div>';
+  const multColor = totalMultiplier >= 1.3 ? 'color-green' : totalMultiplier >= 1.1 ? 'color-blue' : totalMultiplier >= 1.0 ? 'color-orange' : 'color-red';
+  h += card('Total Multiplier: '+totalMultiplier.toFixed(2)+'×', 'Every hour of your effort is worth '+totalMultiplier.toFixed(2)+' hours compared to a baseline person. Your advantages and disadvantages combined.', multColor);
+  h += '<div class="fact-row">';
+  h += cardS(efficiencyMultipliers.education.toFixed(2)+'×', 'Education ('+edu.label+')', 'color-blue');
+  h += cardS(efficiencyMultipliers.health.toFixed(2)+'×', 'Health', efficiencyMultipliers.health >= 1 ? 'color-green' : 'color-red');
+  h += '</div>';
+  h += '<div class="fact-row">';
+  h += cardS(efficiencyMultipliers.location.toFixed(2)+'×', 'Location', 'color-cyan');
+  h += cardS(efficiencyMultipliers.cognitiveTools.toFixed(2)+'×', 'Languages', 'color-pink');
+  h += '</div>';
+  if (totalMultiplier > 1.3) {
+    h += card('🚀 Compounding Advantages', 'Your multipliers compound over time. A 1.3× multiplier over 30 years of work = you accomplish what others would in 40 years.', 'color-green');
+  }
+  if (totalMultiplier < 1.0) {
+    h += card('⚠️ Working Uphill', 'Your current circumstances create drag. But circumstances can change — health and social support are the most improvable factors.', 'color-orange');
+  }
+  h += src('📊 Human capital economics, returns to education (Card), location economics');
+  h += '</div>';
+
+  // ── YOUR TRAJECTORY COMPARISON ──
+  h += '<div class="category anim" style="animation-delay:.34s">';
+  h += '<div class="cat-header"><span class="cat-icon">📊</span><span class="cat-title">Trajectory vs Average</span></div>';
+  h += card('Your Position', 'Comparing your key metrics to statistical averages for your age', 'color-accent');
+  h += '<div class="fact-row">';
+  h += cardS(trajectoryComparison.healthVsAvg, 'Health', trajectoryComparison.healthVsAvg.includes('Better') ? 'color-green' : trajectoryComparison.healthVsAvg.includes('Below') ? 'color-red' : 'color-blue');
+  h += cardS(trajectoryComparison.wealthProxy, 'Wealth Path', trajectoryComparison.wealthProxy.includes('Above') ? 'color-green' : trajectoryComparison.wealthProxy.includes('Below') ? 'color-orange' : 'color-blue');
+  h += '</div>';
+  h += '<div class="fact-row">';
+  h += cardS(trajectoryComparison.socialVsAvg, 'Social', trajectoryComparison.socialVsAvg.includes('Above') ? 'color-green' : trajectoryComparison.socialVsAvg.includes('Below') ? 'color-orange' : 'color-blue');
+  h += cardS(trajectoryComparison.skillVsAvg, 'Skills', trajectoryComparison.skillVsAvg.includes('Above') ? 'color-green' : trajectoryComparison.skillVsAvg.includes('Below') ? 'color-orange' : 'color-blue');
+  h += '</div>';
+  const aboveCount = Object.values(trajectoryComparison).filter(v => v.includes('Above')).length;
+  const belowCount = Object.values(trajectoryComparison).filter(v => v.includes('Below')).length;
+  if (aboveCount >= 3) {
+    h += card('🌟 Ahead of the Curve', 'You\'re above average in '+aboveCount+'/4 major life dimensions. Whatever you\'re doing, it\'s working.', 'color-green');
+  }
+  if (belowCount >= 3) {
+    h += card('💪 Room to Grow', 'You\'re below average in '+belowCount+'/4 dimensions. The good news: these are all improvable with focused effort.', 'color-orange');
+  }
+  h += src('📊 Comparison to population-level statistics for your age bracket');
   h += '</div>';
 
   // ── BIRTHDAY ──
@@ -2670,6 +3746,81 @@ function generateResults(name, age, gender, bdStr, city, height, weight, job, si
   h += src('⚠️ Disclaimer: this is a fun estimate, NOT medical advice. Based on population-level studies (Lancet, WHO, NIH, BMJ). Consult a doctor for real health assessments.');
   h += '</div>';
 
+  // ── 💧 HYDRATION ──
+  h += '<div class="category anim" style="animation-delay:1.016s">';
+  h += '<div class="cat-header"><span class="cat-icon">💧</span><span class="cat-title">Your Hydration</span></div>';
+  h += card(waterBottlesPerDay+' bottles/day','that\'s '+waterLitersPerDay+'L daily — '+(isHydrated?'✅ well hydrated!':'⚠️ below recommended'),'color-accent');
+  h += card(waterPctOfRecommended+'% of recommended','your body needs ~'+Math.round(recommendedWaterMl)+'ml/day based on your '+weight+'kg weight. You\'re drinking ~'+waterMlPerDay+'ml.', isHydrated?'color-green':'color-orange');
+  h += '<div class="fact-row">';
+  h += cardS(fmtE(waterLitersLifetime)+'L','water drunk in lifetime','color-blue');
+  h += cardS(fmtE(waterLitersRemaining)+'L','still to drink','color-cyan');
+  h += '</div>';
+  h += card(fmtE(Math.round(waterLitersLifetime * 2)),'bottles opened in your lifetime (assuming 500ml bottles)','color-pink');
+  h += src('📊 Source: WHO hydration guidelines (~35ml per kg body weight)');
+  h += '</div>';
+
+  // ── 🙏 RELIGION & SPIRITUALITY ──
+  h += '<div class="category anim" style="animation-delay:1.017s">';
+  h += '<div class="cat-header"><span class="cat-icon">🙏</span><span class="cat-title">Religion & Spirituality</span></div>';
+  h += card(religiousLabel,religiousFacts[religious]||religiousFacts['no'],'color-accent');
+  if (religious === 'yes') {
+    h += card('~5,200 hours','average time a religious person spends in worship over a lifetime','color-blue');
+    h += card('84%','of the world identifies with a religion — you\'re in the global majority','color-green');
+  } else if (religious === 'spiritual') {
+    h += card('Fastest growing group','the "spiritual but not religious" category has tripled since 1999','color-cyan');
+  } else {
+    h += card('16%','of the world is non-religious — projected to reach 20%+ by 2050','color-blue');
+  }
+  h += src('📊 Source: Pew Research Center, World Values Survey');
+  h += '</div>';
+
+  // ── 🧠 MENTAL HEALTH JOURNEY ──
+  h += '<div class="category anim" style="animation-delay:1.018s">';
+  h += '<div class="cat-header"><span class="cat-icon">🧠</span><span class="cat-title">Mental Health Journey</span></div>';
+  
+  // Therapy
+  const therapyEmoji = therapy === 'currently' ? '🟢' : therapy === 'past' ? '🔵' : '⚪';
+  h += card(therapyEmoji+' '+therapyLabel,therapyFacts[therapy]||therapyFacts['no'],'color-accent');
+  
+  // Psychiatrist
+  const psychiatristEmoji = psychiatrist === 'currently' ? '🟢' : psychiatrist === 'past' ? '🔵' : '⚪';
+  h += card(psychiatristEmoji+' '+psychiatristLabel,psychiatristFacts[psychiatrist]||psychiatristFacts['no'],'color-blue');
+
+  // Stats based on seeking help
+  if (therapy === 'currently' || therapy === 'past' || psychiatrist === 'currently' || psychiatrist === 'past') {
+    h += card('💪 You\'ve sought help','people who seek mental health support have 60% better long-term outcomes than those who don\'t','color-green');
+  }
+  
+  h += '<div class="fact-row">';
+  h += cardS(therapyPct+'%','adults have seen a therapist','color-pink');
+  h += cardS(psychiatristPct+'%','have seen a psychiatrist','color-cyan');
+  h += '</div>';
+  h += src('📊 Source: NIMH, APA mental health statistics');
+  h += '</div>';
+
+  // ── 🏥 HEALTH CONDITIONS ──
+  h += '<div class="category anim" style="animation-delay:1.019s">';
+  h += '<div class="cat-header"><span class="cat-icon">🏥</span><span class="cat-title">Health Conditions</span></div>';
+  
+  // Physical health
+  const healthEmoji = healthCondition === 'no' ? '✅' : healthCondition === 'multiple' ? '⚠️' : '🔶';
+  h += card(healthEmoji+' '+healthConditionLabel,healthConditionFacts[healthCondition]||healthConditionFacts['no'], healthCondition === 'no' ? 'color-green' : 'color-orange');
+  
+  // Mental health conditions
+  const mentalEmoji = mentalHealth === 'no' ? '✅' : mentalHealth === 'multiple' ? '⚠️' : '🔶';
+  h += card(mentalEmoji+' '+mentalHealthLabel,mentalHealthFacts[mentalHealth]||mentalHealthFacts['no'], mentalHealth === 'no' ? 'color-green' : 'color-orange');
+  
+  h += '<div class="fact-row">';
+  h += cardS(chronicHealthPct+'%','adults have chronic condition','color-blue');
+  h += cardS(mentalHealthConditionPct+'%','have mental health condition','color-pink');
+  h += '</div>';
+  
+  if (healthCondition !== 'no' || mentalHealth !== 'no') {
+    h += card('❤️ You\'re not alone','health challenges are incredibly common — most adults manage at least one ongoing condition','color-accent');
+  }
+  h += src('📊 Source: CDC, WHO global health statistics');
+  h += '</div>';
+
   // ── CHRONOTYPE ──
   h += '<div class="category anim" style="animation-delay:1.02s">';
   h += '<div class="cat-header"><span class="cat-icon">'+chrono.emoji+'</span><span class="cat-title">Your Chronotype</span></div>';
@@ -2684,12 +3835,7 @@ function generateResults(name, age, gender, bdStr, city, height, weight, job, si
   h += '<div class="category anim" style="animation-delay:1.04s">';
   h += '<div class="cat-header"><span class="cat-icon">🧰</span><span class="cat-title">Life Skills Scorecard</span></div>';
 
-  // Count skills
-  const skillsList = [
-    canSwim==='yes', canDrive==='yes', canBike==='yes', cookLevel!=='no',
-    instrument==='yes', cpr==='yes', education!=='none'&&education!=='school', passport==='yes'
-  ];
-  const skillCount = skillsList.filter(Boolean).length;
+  // skillCount already calculated earlier
   const skillBar = '🟢'.repeat(skillCount) + '⚫'.repeat(8 - skillCount);
   h += card(skillBar+' '+skillCount+'/8 skills','unlocked. You\'re in the '+(skillCount>=7?'top 2%':skillCount>=5?'top 15%':skillCount>=3?'top 40%':'bottom 50%')+' of humans by skill diversity','color-accent');
 
