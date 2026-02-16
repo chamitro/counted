@@ -4,7 +4,7 @@
 
 Enter a few details about yourself. Get 200+ mind-blowing, scientifically-sourced facts about your life — from your heartbeats to your cosmic speed through the universe.
 
-🔗 **[Try it live →](https://chamitro.github.io/counted/)**
+🔗 **[Try it live → COUNTED ](https://chamitro.github.io/counted/)**
 
 ---
 
