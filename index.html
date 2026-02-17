@@ -1200,6 +1200,7 @@ function generateResults(name, age, gender, bdStr, city, height, weight, job, si
   const jobLabel = document.getElementById('f-job').selectedOptions[0].text;
 
   const workYrs = Math.max(0, jobProfile.retireAge - Math.max(age, 22));
+  const workYearsRemaining = workYrs; // alias for use in other calculations
   const weeklyHrs = jobProfile.hrsWeek;
   const workWeeks = workYrs * 52;
   const workHrs = workWeeks * weeklyHrs;
