@@ -233,6 +233,18 @@
           <option value="other_guardian">Other guardian</option>
         </select>
       </div>
+      <div class="form-group"><label class="form-label">See Parents?</label>
+        <select class="form-input" id="f-see-parents">
+          <option value="daily">Daily 🏠</option>
+          <option value="weekly">Weekly</option>
+          <option value="monthly" selected>Monthly</option>
+          <option value="yearly">Few times a year</option>
+          <option value="rarely">Rarely / Never</option>
+          <option value="na">N/A (passed away)</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
       <div class="form-group"><label class="form-label">Number of Siblings</label><input class="form-input" id="f-siblings" type="number" placeholder="1" min="0" max="10" value="0" onchange="updateSiblingInputs()" oninput="updateSiblingInputs()"></div>
     </div>
     <div id="sibling-ages-container"></div>
@@ -292,13 +304,6 @@
     <div class="form-row">
       <div class="form-group"><label class="form-label">Pets Owned</label>
         <input class="form-input" id="f-pets" type="number" placeholder="1" min="0" max="50" value="0">
-      </div>
-      <div class="form-group"><label class="form-label">Religious?</label>
-        <select class="form-input" id="f-religious">
-          <option value="no">No</option>
-          <option value="yes">Yes 🙏</option>
-          <option value="spiritual">Spiritual but not religious ✨</option>
-        </select>
       </div>
     </div>
     <div style="padding:12px 0 4px;border-top:1px solid var(--border);margin-top:12px"><span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent2);letter-spacing:3px;text-transform:uppercase">LIFESTYLE</span></div>
@@ -361,22 +366,13 @@
     </div>
     <div style="padding:12px 0 4px;border-top:1px solid var(--border);margin-top:12px"><span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent2);letter-spacing:3px;text-transform:uppercase">HEALTH & WELLBEING</span></div>
     <div class="form-row">
-      <div class="form-group"><label class="form-label">See Therapist / Psychologist?</label>
+      <div class="form-group"><label class="form-label">Mental Health Support?</label>
         <select class="form-input" id="f-therapy">
           <option value="no">No</option>
           <option value="currently">Yes, currently 🧠</option>
           <option value="past">In the past</option>
         </select>
       </div>
-      <div class="form-group"><label class="form-label">See Psychiatrist?</label>
-        <select class="form-input" id="f-psychiatrist">
-          <option value="no">No</option>
-          <option value="currently">Yes, currently 💊</option>
-          <option value="past">In the past</option>
-        </select>
-      </div>
-    </div>
-    <div class="form-row">
       <div class="form-group"><label class="form-label">Chronic Health Condition?</label>
         <select class="form-input" id="f-health-condition">
           <option value="no">No</option>
@@ -901,10 +897,9 @@ async function startGenerate() {
     momAge, dadAge, parentsStatus, siblingAges,
     momAlive: document.getElementById('f-mom-alive').value,
     dadAlive: document.getElementById('f-dad-alive').value,
+    seeParents: document.getElementById('f-see-parents').value,
     waterBottlesPerDay: parseInt(document.getElementById('f-water').value) || 4,
-    religious: document.getElementById('f-religious').value,
     therapy: document.getElementById('f-therapy').value,
-    psychiatrist: document.getElementById('f-psychiatrist').value,
     healthCondition: document.getElementById('f-health-condition').value,
     mentalHealth: document.getElementById('f-mental-health').value,
   };
@@ -1046,7 +1041,7 @@ function generateResults(name, age, gender, bdStr, city, height, weight, job, si
     canBike, cookLevel, instrument, cpr, education, passport, tattoo, brokenBone, donatedBlood,
     momAge, dadAge, parentsStatus, siblingAges, momAlive, dadAlive,
     workHrsPerDay, homeMealsPerWeek, friendDaysPerWeek, relDuration, cigsPerDay,
-    waterBottlesPerDay, religious, therapy, psychiatrist, healthCondition, mentalHealth } = extra;
+    waterBottlesPerDay, seeParents, therapy, healthCondition, mentalHealth } = extra;
 
   // ═══ SKILLS COUNT (defined early for cross-referencing) ═══
   const skillsList = [
@@ -1899,31 +1894,13 @@ function generateResults(name, age, gender, bdStr, city, height, weight, job, si
   const waterPctOfRecommended = Math.round((waterMlPerDay / recommendedWaterMl) * 100);
   const isHydrated = waterPctOfRecommended >= 80;
 
-  // ═══ 🙏 RELIGION STATS ═══
-  const religiousPct = 84; // ~84% of world identifies as religious
-  const notReligiousPct = 16;
-  const spiritualPct = 8; // roughly 8% spiritual but not religious
-  const religiousLabel = religious === 'yes' ? 'Religious' : religious === 'spiritual' ? 'Spiritual' : 'Not religious';
-  const religiousFacts = {
-    'yes': 'You\'re among the 84% of humanity who identify with a religion. Studies show religious people report 20% higher life satisfaction on average.',
-    'spiritual': 'You\'re among the ~8% who consider themselves spiritual but not religious. This group has tripled since 1999.',
-    'no': 'You\'re among the 16% who aren\'t religious. This group is growing fastest in developed nations — doubled since 2007.'
-  };
-
   // ═══ 🧠 MENTAL HEALTH STATS ═══
-  const therapyPct = 13; // ~13% of adults have seen a therapist
-  const psychiatristPct = 7; // ~7% have seen a psychiatrist
-  const therapyLabel = therapy === 'currently' ? 'Currently in therapy' : therapy === 'past' ? 'Past therapy' : 'No therapy';
-  const psychiatristLabel = psychiatrist === 'currently' ? 'Currently seeing psychiatrist' : psychiatrist === 'past' ? 'Past psychiatrist visits' : 'Never seen psychiatrist';
+  const therapyPct = 13; // ~13% of adults have sought mental health support
+  const therapyLabel = therapy === 'currently' ? 'Currently getting support' : therapy === 'past' ? 'Past mental health support' : 'No mental health support';
   const therapyFacts = {
-    'currently': 'You\'re actively working on your mental health — only ~5% of adults are currently in therapy. This shows remarkable self-awareness.',
-    'past': 'You\'ve invested in your mental well-being — ~13% of adults have been to therapy at some point. The skills you learned stay with you.',
-    'no': 'You\'ve never been to therapy — you\'re in the 87% majority. Remember: therapy isn\'t just for crises, it\'s also for growth.'
-  };
-  const psychiatristFacts = {
-    'currently': 'You\'re getting specialized mental health care — only ~3% of adults currently see a psychiatrist. Taking care of your brain is just as important as your body.',
-    'past': 'You\'ve worked with a psychiatrist before — ~7% of adults have at some point. Mental health is health.',
-    'no': 'You\'ve never seen a psychiatrist — you\'re in the 93% majority. Psychiatrists aren\'t just for severe conditions — they can help optimize anyone\'s mental health.'
+    'currently': 'You\'re actively working on your mental health — only ~5% of adults currently seek professional support. This shows remarkable self-awareness.',
+    'past': 'You\'ve invested in your mental well-being — ~13% of adults have sought help at some point. The skills you learned stay with you.',
+    'no': 'You\'ve never sought mental health support — you\'re in the 87% majority. Remember: therapy isn\'t just for crises, it\'s also for growth.'
   };
 
   // ═══ 🏥 HEALTH CONDITIONS STATS ═══
@@ -1959,10 +1936,8 @@ function generateResults(name, age, gender, bdStr, city, height, weight, job, si
     attachmentStyle: parentsStatus === 'together' && momAlive === 'alive' && dadAlive === 'alive' ? 'secure-leaning' :
                      parentsStatus === 'divorced' ? 'may have developed independence early' :
                      (momAlive === 'passed' || dadAlive === 'passed') ? 'experienced early loss' : 'mixed',
-    copingStrategy: (therapy === 'currently' || psychiatrist === 'currently') ? 'actively processing' :
-                    (therapy === 'past' || psychiatrist === 'past') ? 'has sought help before' :
-                    religious === 'yes' ? 'may use faith as framework' :
-                    religious === 'spiritual' ? 'spiritually-oriented coping' : 'self-reliant approach',
+    copingStrategy: therapy === 'currently' ? 'actively processing' :
+                    therapy === 'past' ? 'has sought help before' : 'self-reliant approach',
     socialOrientation: relationship !== 'single' && friendDaysPerWeek >= 3 ? 'highly social' :
                        relationship !== 'single' || friendDaysPerWeek >= 2 ? 'balanced social' :
                        friendDaysPerWeek === 0 && relationship === 'single' ? 'independent/introverted' : 'selectively social',
@@ -1995,16 +1970,15 @@ function generateResults(name, age, gender, bdStr, city, height, weight, job, si
   };
 
   // ─── YOUR RESILIENCE INDEX ───
-  // Combining: health conditions, mental health, therapy, exercise, sleep, social connections, religion
+  // Combining: health conditions, mental health, therapy, exercise, sleep, social connections
   const resilienceFactors = {
     physical: (exercise >= 3 ? 2 : exercise >= 1 ? 1 : 0) + (sleepHrs >= 7 && sleepHrs <= 9 ? 1 : 0) + (cigsPerDay === 0 ? 1 : -1) + (healthCondition === 'no' ? 1 : 0),
-    psychological: (therapy === 'currently' || therapy === 'past' ? 2 : 0) + (mentalHealth === 'no' ? 1 : mentalHealth === 'yes' ? 0 : -1) + (psychiatrist === 'currently' || psychiatrist === 'past' ? 1 : 0),
+    psychological: (therapy === 'currently' || therapy === 'past' ? 2 : 0) + (mentalHealth === 'no' ? 1 : mentalHealth === 'yes' ? 0 : -1),
     social: (relationship !== 'single' ? 1 : 0) + (friendDaysPerWeek >= 2 ? 1 : 0) + (kids > 0 ? 1 : 0) + (pets > 0 ? 0.5 : 0) + (momAlive === 'alive' ? 0.5 : 0) + (dadAlive === 'alive' ? 0.5 : 0),
-    spiritual: religious === 'yes' ? 2 : religious === 'spiritual' ? 1 : 0,
     skills: (canSwim === 'yes' ? 0.5 : 0) + (cpr === 'yes' ? 0.5 : 0) + (cookLevel !== 'no' ? 0.5 : 0) + (canDrive === 'yes' ? 0.5 : 0)
   };
   const resilienceTotal = Object.values(resilienceFactors).reduce((a, b) => a + b, 0);
-  const resiliencePercentile = resilienceTotal >= 12 ? 95 : resilienceTotal >= 9 ? 80 : resilienceTotal >= 6 ? 60 : resilienceTotal >= 3 ? 40 : 20;
+  const resiliencePercentile = resilienceTotal >= 10 ? 95 : resilienceTotal >= 7 ? 80 : resilienceTotal >= 5 ? 60 : resilienceTotal >= 3 ? 40 : 20;
 
   // ─── YOUR PARADOXES & CONTRADICTIONS ───
   // Finding genuinely interesting contradictions in the data
@@ -2034,15 +2008,6 @@ function generateResults(name, age, gender, bdStr, city, height, weight, job, si
       title: 'The Cobbler\'s Children',
       insight: 'You help others process their minds professionally, but haven\'t sought therapy yourself. Like the saying goes — the cobbler\'s children go barefoot.',
       emoji: '🧠'
-    });
-  }
-
-  // Religious but also in therapy (integration)
-  if (religious === 'yes' && (therapy === 'currently' || psychiatrist === 'currently')) {
-    paradoxes.push({
-      title: 'Faith + Science',
-      insight: 'You combine religious faith with professional mental health care — a powerful combination. Studies show this integration leads to better outcomes than either alone.',
-      emoji: '🙏🧠'
     });
   }
 
@@ -2191,15 +2156,6 @@ function generateResults(name, age, gender, bdStr, city, height, weight, job, si
     });
   }
 
-  // Very religious but tattoos
-  if (religious === 'yes' && (tattoo === '2-5' || tattoo === '6+')) {
-    paradoxes.push({
-      title: 'Marked by Faith',
-      insight: 'You\'re religious with multiple tattoos. While some traditions prohibit body modification, many people use tattoos TO express faith. Your body tells your spiritual story.',
-      emoji: '🙏🖋️'
-    });
-  }
-
   // High exercise, active job = extreme physical load
   if (exercise >= 4 && ['construction', 'farmer', 'fitness', 'athlete', 'firefighter', 'military'].includes(job)) {
     paradoxes.push({
@@ -2268,7 +2224,7 @@ function generateResults(name, age, gender, bdStr, city, height, weight, job, si
   }
 
   // Multiple health conditions but no therapy
-  if ((healthCondition === 'multiple' || mentalHealth === 'multiple') && therapy === 'no' && psychiatrist === 'no') {
+  if ((healthCondition === 'multiple' || mentalHealth === 'multiple') && therapy === 'no') {
     paradoxes.push({
       title: 'Going It Alone',
       insight: 'You\'re managing multiple health conditions without professional mental health support. The load you\'re carrying is significant. Support exists when you\'re ready.',
@@ -2385,9 +2341,7 @@ function generateResults(name, age, gender, bdStr, city, height, weight, job, si
     { trait: 'Speaks '+languages+' language'+(languages>1?'s':''), rarity: langPct, category: 'achievement' },
     { trait: 'Plays instrument', rarity: instrument === 'yes' ? instrumentPct : 100-instrumentPct, category: 'skill' },
     { trait: 'Knows CPR', rarity: cpr === 'yes' ? cprPct : 100-cprPct, category: 'skill' },
-    { trait: religious === 'yes' ? 'Religious' : religious === 'spiritual' ? 'Spiritual' : 'Not religious', 
-      rarity: religious === 'yes' ? religiousPct : religious === 'spiritual' ? spiritualPct : notReligiousPct, category: 'worldview' },
-    { trait: 'In therapy', rarity: therapy === 'currently' ? 5 : therapy === 'past' ? therapyPct : 100-therapyPct, category: 'health' },
+    { trait: 'Mental health support', rarity: therapy === 'currently' ? 5 : therapy === 'past' ? therapyPct : 100-therapyPct, category: 'health' },
   ].filter(t => t.rarity < 20).sort((a, b) => a.rarity - b.rarity);
 
   const rarestTrait = traitRarities[0];
@@ -2412,16 +2366,28 @@ function generateResults(name, age, gender, bdStr, city, height, weight, job, si
   // ─── DEEP CROSS-CORRELATIONS ───
   // Non-paradox insights that combine data in interesting ways
 
+  // Convert seeParents frequency to visits per year
+  const visitsPerYearMap = {
+    'daily': 365,
+    'weekly': 52,
+    'monthly': 12,
+    'yearly': 4,
+    'rarely': 1,
+    'na': 0
+  };
+  const parentVisitsPerYear = visitsPerYearMap[seeParents] || 12;
+  const seeParentsLabel = seeParents === 'daily' ? 'daily' : seeParents === 'weekly' ? 'weekly' : seeParents === 'monthly' ? 'monthly' : seeParents === 'yearly' ? 'a few times a year' : 'rarely';
+
   // Time remaining with living parents (if alive)
-  const timeWithMom = momAlive === 'alive' && momAge > 0 ? {
-    yearsLeft: Math.max(0, (gender === 'female' ? 84 : 78) - momAge), // mom's LE
-    visitsPerYear: 12, // assume monthly
-    totalVisitsRemaining: Math.max(0, ((gender === 'female' ? 84 : 78) - momAge)) * 12
+  const timeWithMom = momAlive === 'alive' && momAge > 0 && seeParents !== 'na' ? {
+    yearsLeft: Math.max(0, 84 - momAge), // mom's LE (female avg)
+    visitsPerYear: parentVisitsPerYear,
+    totalVisitsRemaining: Math.max(0, (84 - momAge)) * parentVisitsPerYear
   } : null;
-  const timeWithDad = dadAlive === 'alive' && dadAge > 0 ? {
-    yearsLeft: Math.max(0, (gender === 'male' ? 76 : 74) - dadAge), // dad's LE  
-    visitsPerYear: 12,
-    totalVisitsRemaining: Math.max(0, ((gender === 'male' ? 76 : 74) - dadAge)) * 12
+  const timeWithDad = dadAlive === 'alive' && dadAge > 0 && seeParents !== 'na' ? {
+    yearsLeft: Math.max(0, 78 - dadAge), // dad's LE (male avg)
+    visitsPerYear: parentVisitsPerYear,
+    totalVisitsRemaining: Math.max(0, (78 - dadAge)) * parentVisitsPerYear
   } : null;
 
   // Your chronological position in family
@@ -2447,11 +2413,10 @@ function generateResults(name, age, gender, bdStr, city, height, weight, job, si
     romanticBond: relationship === 'married' ? 5 : relationship === 'dating' ? 3 : 0,
     friendshipStrength: friendDaysPerWeek * 2,
     petCompanionship: pets,
-    communityTies: religious === 'yes' ? 3 : religious === 'spiritual' ? 1 : 0,
     professionalNetwork: ['executive', 'manager', 'consultant', 'sales', 'hr', 'entrepreneur'].includes(job) ? 3 : 1
   };
   const totalSocialCapital = Object.values(socialCapital).reduce((a, b) => a + b, 0);
-  const socialCapitalPercentile = totalSocialCapital >= 20 ? 95 : totalSocialCapital >= 15 ? 80 : totalSocialCapital >= 10 ? 60 : totalSocialCapital >= 5 ? 40 : 20;
+  const socialCapitalPercentile = totalSocialCapital >= 18 ? 95 : totalSocialCapital >= 12 ? 80 : totalSocialCapital >= 8 ? 60 : totalSocialCapital >= 4 ? 40 : 20;
 
   // Your "life stage" analysis
   const lifeStage = age < 25 ? {
@@ -2503,17 +2468,17 @@ function generateResults(name, age, gender, bdStr, city, height, weight, job, si
   // "Your Life in Headlines" - interesting facts derived from combinations
   const headlines = [];
   
-  if (timeWithMom && timeWithMom.yearsLeft < 15) {
+  if (timeWithMom && timeWithMom.yearsLeft < 20 && timeWithMom.totalVisitsRemaining > 0) {
     headlines.push({
-      headline: '~'+timeWithMom.totalVisitsRemaining+' visits with mom remaining',
-      subtext: 'If you see her monthly, you have approximately '+timeWithMom.yearsLeft+' years. Make them count.',
+      headline: '~'+fmtE(timeWithMom.totalVisitsRemaining)+' visits with mom remaining',
+      subtext: 'Seeing her '+seeParentsLabel+', you have approximately '+timeWithMom.yearsLeft+' years left. Make them count.',
       emoji: '👩'
     });
   }
-  if (timeWithDad && timeWithDad.yearsLeft < 15) {
+  if (timeWithDad && timeWithDad.yearsLeft < 20 && timeWithDad.totalVisitsRemaining > 0) {
     headlines.push({
-      headline: '~'+timeWithDad.totalVisitsRemaining+' visits with dad remaining',
-      subtext: 'Based on life expectancy and assuming monthly visits. Call him.',
+      headline: '~'+fmtE(timeWithDad.totalVisitsRemaining)+' visits with dad remaining',
+      subtext: 'Seeing him '+seeParentsLabel+', based on life expectancy. Call him.',
       emoji: '👨'
     });
   }
@@ -2942,10 +2907,8 @@ function generateResults(name, age, gender, bdStr, city, height, weight, job, si
   }
   
   h += card('🧘 Coping Strategy', 
-    psychProfile.copingStrategy === 'actively processing' ? 'You\'re currently in therapy/psychiatric care — this indicates high self-awareness and proactive mental health management. Only ~5% of adults are actively in treatment.' :
+    psychProfile.copingStrategy === 'actively processing' ? 'You\'re currently getting mental health support — this indicates high self-awareness and proactive mental health management. Only ~5% of adults are actively in treatment.' :
     psychProfile.copingStrategy === 'has sought help before' ? 'You\'ve sought professional help before — you know when to reach out, a skill many never develop.' :
-    psychProfile.copingStrategy === 'may use faith as framework' ? 'You may process life through a religious framework — faith provides meaning-making structures that reduce anxiety and increase life satisfaction (per Pew Research).' :
-    psychProfile.copingStrategy === 'spiritually-oriented coping' ? 'You lean spiritual without formal religion — this often means you\'ve constructed your own meaning-making framework.' :
     'Self-reliant coping approach — you handle things internally, which builds resilience but watch for when problems exceed solo capacity.', 'color-pink');
   
   h += card('👥 Social Orientation: '+psychProfile.socialOrientation.charAt(0).toUpperCase()+psychProfile.socialOrientation.slice(1), 
@@ -2960,6 +2923,7 @@ function generateResults(name, age, gender, bdStr, city, height, weight, job, si
   h += '<div class="category anim" style="animation-delay:.24s">';
   h += '<div class="cat-header"><span class="cat-icon">🎯</span><span class="cat-title">Your Cognitive Profile</span></div>';
   h += card('Cognitive Complexity Score: '+cognitiveScore+'/15', 'Top '+cognitivePercentile+'% based on languages, education, musical training, handedness, and profession type', cognitivePercentile >= 90 ? 'color-pink' : cognitivePercentile >= 70 ? 'color-green' : 'color-accent');
+  h += '<div style="font-size:11px;color:var(--text2);padding:4px 12px;margin-bottom:8px">📊 Score guide: <span style="color:#10b981">10+ Exceptional</span> · <span style="color:#3b82f6">6-9 Strong</span> · <span style="color:#f59e0b">3-5 Average</span> · <span style="color:#ef4444">&lt;3 Developing</span></div>';
   if (cognitiveProfile.strengths.length > 0) {
     h += card('🧬 Your Cognitive Advantages', cognitiveProfile.strengths.join(' • '), 'color-blue');
   }
@@ -2979,14 +2943,15 @@ function generateResults(name, age, gender, bdStr, city, height, weight, job, si
   h += '<div class="category anim" style="animation-delay:.25s">';
   h += '<div class="cat-header"><span class="cat-icon">💪</span><span class="cat-title">Your Resilience Index</span></div>';
   const resilienceColor = resiliencePercentile >= 80 ? 'color-green' : resiliencePercentile >= 50 ? 'color-blue' : 'color-orange';
-  h += card('Resilience Score: '+resilienceTotal.toFixed(1), 'Top '+resiliencePercentile+'% — combining physical health, psychological resources, social support, spiritual grounding, and practical skills', resilienceColor);
+  h += card('Resilience Score: '+resilienceTotal.toFixed(1), 'Top '+resiliencePercentile+'% — combining physical health, psychological resources, social support, and practical skills', resilienceColor);
+  h += '<div style="font-size:11px;color:var(--text2);padding:4px 12px;margin-bottom:8px">📊 Score guide: <span style="color:#10b981">8+ Highly resilient</span> · <span style="color:#3b82f6">5-7 Good</span> · <span style="color:#f59e0b">3-4 Moderate</span> · <span style="color:#ef4444">&lt;3 Vulnerable</span></div>';
   h += '<div class="fact-row">';
   h += cardS(resilienceFactors.physical.toFixed(1), 'Physical', resilienceFactors.physical >= 3 ? 'color-green' : 'color-orange');
   h += cardS(resilienceFactors.psychological.toFixed(1), 'Psychological', resilienceFactors.psychological >= 2 ? 'color-green' : 'color-orange');
   h += '</div>';
   h += '<div class="fact-row">';
   h += cardS(resilienceFactors.social.toFixed(1), 'Social', resilienceFactors.social >= 2 ? 'color-green' : 'color-orange');
-  h += cardS(resilienceFactors.spiritual.toFixed(1), 'Spiritual', 'color-blue');
+  h += cardS(resilienceFactors.skills.toFixed(1), 'Skills', resilienceFactors.skills >= 1 ? 'color-green' : 'color-orange');
   h += '</div>';
   const lowestResilience = Object.entries(resilienceFactors).sort((a,b) => a[1] - b[1])[0];
   if (lowestResilience[1] < 1) {
@@ -3021,15 +2986,14 @@ function generateResults(name, age, gender, bdStr, city, height, weight, job, si
   if (moneyBurned.takeout > 5000) {
     h += card('🍔 $'+fmtE(moneyBurned.takeout)+' on takeout/restaurants', (21 - homeMealsPerWeek)+' non-home meals/week × ~$12 each. Cooking '+homeMealsPerWeek+' meals at home saves you $'+fmtE(Math.round(homeMealsPerWeek * 8 * 52))+'/year.', 'color-cyan');
   }
-  const investedInstead = Math.round(totalBurned * Math.pow(1.07, 20)); // if invested at 7% for 20 years
-  h += card('📈 If invested instead...', '$'+fmtE(totalBurned)+' at 7% return over 20 years = $'+fmtE(investedInstead)+'. Not judging, just math.', 'color-blue');
-  h += src('📊 Based on your stated habits, average costs, compound interest at 7%');
+  h += src('📊 Based on your stated habits, average costs');
   h += '</div>';
 
   // ── YOUR LIFE COMPLEXITY SCORE ──
   h += '<div class="category anim" style="animation-delay:.28s">';
   h += '<div class="cat-header"><span class="cat-icon">🌀</span><span class="cat-title">Your Life Complexity Score</span></div>';
   h += card('Complexity Index: '+lifeComplexity, 'Top '+lifeComplexityPercentile+'% — combining family size, responsibilities, experiences, languages, travel, relationships, health challenges, and self-development work', lifeComplexityPercentile >= 80 ? 'color-pink' : 'color-accent');
+  h += '<div style="font-size:11px;color:var(--text2);padding:4px 12px;margin-bottom:8px">📊 Score guide: <span style="color:#ec4899">60+ Very complex</span> · <span style="color:#3b82f6">40-59 Moderate</span> · <span style="color:#10b981">20-39 Balanced</span> · <span style="color:#6b7280">&lt;20 Simple</span> (neither good nor bad)</div>';
   const complexityBreakdown = [];
   if (kids > 0) complexityBreakdown.push(kids+' kid'+(kids>1?'s':'')+' (+'+kids*5+')');
   if (languages > 1) complexityBreakdown.push(languages+' languages (+'+languages*3+')');
@@ -3070,6 +3034,7 @@ function generateResults(name, age, gender, bdStr, city, height, weight, job, si
   h += '<div class="cat-header"><span class="cat-icon">⚡</span><span class="cat-title">Your Biological Efficiency</span></div>';
   const bioColor = bioEfficiencyScore === 'Peak' ? 'color-green' : bioEfficiencyScore === 'High' ? 'color-blue' : bioEfficiencyScore === 'Moderate' ? 'color-orange' : 'color-red';
   h += card('System Status: '+bioEfficiencyScore, optimalCount+'/4 systems optimal. Your body is a machine — this is how well you\'re maintaining it.', bioColor);
+  h += '<div style="font-size:11px;color:var(--text2);padding:4px 12px;margin-bottom:8px">📊 Status guide: <span style="color:#10b981">Peak (4/4)</span> · <span style="color:#3b82f6">High (3/4)</span> · <span style="color:#f59e0b">Moderate (2/4)</span> · <span style="color:#ef4444">Low/Critical (0-1/4)</span></div>';
   h += '<div class="fact-row">';
   h += cardS(bioEfficiency.sleepEfficiency, 'Sleep ('+sleepHrs+'h)', bioEfficiency.sleepEfficiency === 'optimal' ? 'color-green' : 'color-orange');
   h += cardS(bioEfficiency.hydrationEfficiency, 'Hydration ('+waterBottlesPerDay+'×)', bioEfficiency.hydrationEfficiency === 'optimal' ? 'color-green' : 'color-orange');
@@ -3090,15 +3055,16 @@ function generateResults(name, age, gender, bdStr, city, height, weight, job, si
   h += '<div class="cat-header"><span class="cat-icon">🤝</span><span class="cat-title">Your Social Capital</span></div>';
   const scColor = socialCapitalPercentile >= 80 ? 'color-green' : socialCapitalPercentile >= 50 ? 'color-blue' : 'color-orange';
   h += card('Social Capital Score: '+totalSocialCapital, 'Top '+socialCapitalPercentile+'% — your network of support and connection. Research shows social capital predicts wellbeing better than income.', scColor);
+  h += '<div style="font-size:11px;color:var(--text2);padding:4px 12px;margin-bottom:8px">📊 Score guide: <span style="color:#10b981">15+ Excellent</span> · <span style="color:#3b82f6">10-14 Good</span> · <span style="color:#f59e0b">5-9 Moderate</span> · <span style="color:#ef4444">&lt;5 Needs attention</span></div>';
   h += '<div class="fact-row">';
   h += cardS(socialCapital.familyTies, 'Family ties', 'color-pink');
   h += cardS(socialCapital.romanticBond, 'Romantic bond', 'color-red');
   h += '</div>';
   h += '<div class="fact-row">';
   h += cardS(socialCapital.friendshipStrength, 'Friendships', 'color-blue');
-  h += cardS(socialCapital.communityTies, 'Community', 'color-green');
+  h += cardS(socialCapital.professionalNetwork, 'Professional', 'color-green');
   h += '</div>';
-  if (totalSocialCapital < 10) {
+  if (totalSocialCapital < 8) {
     h += card('⚠️ Social Wealth Gap', 'Your social capital is below the resilience threshold. This is the most important metric to improve — loneliness affects health as much as smoking.', 'color-red');
   }
   if (momAlive === 'passed' && dadAlive === 'passed' && siblings === 0) {
@@ -3121,6 +3087,7 @@ function generateResults(name, age, gender, bdStr, city, height, weight, job, si
   h += '<div class="cat-header"><span class="cat-icon">📈</span><span class="cat-title">Your Efficiency Multiplier</span></div>';
   const multColor = totalMultiplier >= 1.3 ? 'color-green' : totalMultiplier >= 1.1 ? 'color-blue' : totalMultiplier >= 1.0 ? 'color-orange' : 'color-red';
   h += card('Total Multiplier: '+totalMultiplier.toFixed(2)+'×', 'Every hour of your effort is worth '+totalMultiplier.toFixed(2)+' hours compared to a baseline person. Your advantages and disadvantages combined.', multColor);
+  h += '<div style="font-size:11px;color:var(--text2);padding:4px 12px;margin-bottom:8px">📊 Multiplier guide: <span style="color:#10b981">1.3×+ Significant advantage</span> · <span style="color:#3b82f6">1.1-1.29× Moderate boost</span> · <span style="color:#f59e0b">1.0-1.09× Baseline</span> · <span style="color:#ef4444">&lt;1.0× Headwinds</span></div>';
   h += '<div class="fact-row">';
   h += cardS(efficiencyMultipliers.education.toFixed(2)+'×', 'Education ('+edu.label+')', 'color-blue');
   h += cardS(efficiencyMultipliers.health.toFixed(2)+'×', 'Health', efficiencyMultipliers.health >= 1 ? 'color-green' : 'color-red');
@@ -3759,42 +3726,20 @@ function generateResults(name, age, gender, bdStr, city, height, weight, job, si
   h += src('📊 Source: WHO hydration guidelines (~35ml per kg body weight)');
   h += '</div>';
 
-  // ── 🙏 RELIGION & SPIRITUALITY ──
-  h += '<div class="category anim" style="animation-delay:1.017s">';
-  h += '<div class="cat-header"><span class="cat-icon">🙏</span><span class="cat-title">Religion & Spirituality</span></div>';
-  h += card(religiousLabel,religiousFacts[religious]||religiousFacts['no'],'color-accent');
-  if (religious === 'yes') {
-    h += card('~5,200 hours','average time a religious person spends in worship over a lifetime','color-blue');
-    h += card('84%','of the world identifies with a religion — you\'re in the global majority','color-green');
-  } else if (religious === 'spiritual') {
-    h += card('Fastest growing group','the "spiritual but not religious" category has tripled since 1999','color-cyan');
-  } else {
-    h += card('16%','of the world is non-religious — projected to reach 20%+ by 2050','color-blue');
-  }
-  h += src('📊 Source: Pew Research Center, World Values Survey');
-  h += '</div>';
-
   // ── 🧠 MENTAL HEALTH JOURNEY ──
-  h += '<div class="category anim" style="animation-delay:1.018s">';
+  h += '<div class="category anim" style="animation-delay:1.017s">';
   h += '<div class="cat-header"><span class="cat-icon">🧠</span><span class="cat-title">Mental Health Journey</span></div>';
   
-  // Therapy
+  // Therapy/Mental health support
   const therapyEmoji = therapy === 'currently' ? '🟢' : therapy === 'past' ? '🔵' : '⚪';
   h += card(therapyEmoji+' '+therapyLabel,therapyFacts[therapy]||therapyFacts['no'],'color-accent');
-  
-  // Psychiatrist
-  const psychiatristEmoji = psychiatrist === 'currently' ? '🟢' : psychiatrist === 'past' ? '🔵' : '⚪';
-  h += card(psychiatristEmoji+' '+psychiatristLabel,psychiatristFacts[psychiatrist]||psychiatristFacts['no'],'color-blue');
 
   // Stats based on seeking help
-  if (therapy === 'currently' || therapy === 'past' || psychiatrist === 'currently' || psychiatrist === 'past') {
+  if (therapy === 'currently' || therapy === 'past') {
     h += card('💪 You\'ve sought help','people who seek mental health support have 60% better long-term outcomes than those who don\'t','color-green');
   }
   
-  h += '<div class="fact-row">';
-  h += cardS(therapyPct+'%','adults have seen a therapist','color-pink');
-  h += cardS(psychiatristPct+'%','have seen a psychiatrist','color-cyan');
-  h += '</div>';
+  h += card(therapyPct+'%','of adults have sought mental health support at some point','color-pink');
   h += src('📊 Source: NIMH, APA mental health statistics');
   h += '</div>';
 
